@@ -2,7 +2,7 @@ import hashlib
 import json
 import os
 import tqdm
-from market_api import CardMarketScraper
+from market_api import CardApi, ShippingApi
 from collections import defaultdict
 import pandas as pd
 import argparse 
@@ -469,10 +469,10 @@ def main():
         
     if args.scrape:
         # Scrape more data
-        scraper = CardMarketScraper()
+        api = CardApi()
         print("CardMarket Scraper initialized.")
-        raw_data = scraper.gather_data(scrape_card_names)
-        scraper.close()
+        raw_data = api.gather_data(scrape_card_names)
+        api.close()
     
         # Add new listings to the listings dataframe
         listings_df = parse_raw_data(raw_data, previous_listings=listings_df)
@@ -508,7 +508,7 @@ def main():
                     shipping_dict = json.load(f)
         if not shipping_dict:
             print(f"No shipping dictionary provided, scraping shipping prices for {TO_COUNTRY}")
-            shipping_dict = CardMarketScraper.get_shipping_prices(TO_COUNTRY)
+            shipping_dict = ShippingApi.get_shipping_prices(TO_COUNTRY)
             print(f"Saving shipping dictionary to {args.shipping_dict_path}")
             if args.shipping_dict_path: 
                 with open(args.shipping_dict_path, 'w') as f:

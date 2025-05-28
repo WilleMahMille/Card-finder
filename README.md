@@ -1,5 +1,9 @@
 # Card finder
 
+## GitHub Repository
+
+🔗 **Repository**: [https://github.com/WilleMahMille/card-finder](https://github.com/WilleMahMille/card-finder)
+
 This script helps you find the cheapest way to purchase magic the gathering cards by first gathering listings / data, and then using a dynamic programming approach to identify the cheapest way to purchase the cards, taking shipping prices into consideration.
 
 ## API specifications
@@ -52,7 +56,7 @@ Your Shipping API implementation must provide the following static method:
 
 ### Card API
 
-The Card API provides functionality to scrape and gather card listing data from card marketplaces.
+The Card API provides functionality to get listing data from card marketplaces.
 
 #### Required Interface
 
@@ -68,7 +72,7 @@ Your Card API implementation must provide the following methods:
 
 ##### `CardApi.gather_data(card_names: list[str]) -> list[dict]`
 
-**Purpose**: Scrapes card listings for the specified card names.
+**Purpose**: Gathers data for the specified card names.
 
 **Parameters**:
 
@@ -77,7 +81,7 @@ Your Card API implementation must provide the following methods:
 **Returns**:
 
 - `list[dict]`: A list of dictionaries, where each dictionary represents a card listing with the following required keys:
-  - `seller` (str): The name/identifier of the seller
+  - `seller` (str): The name/identifier of the seller, is assumed to be unique
   - `card_name` (str): The name of the card
   - `price` (float): The price of the card
   - `country` (str): The country where the seller is located
@@ -108,15 +112,6 @@ Your Card API implementation must provide the following methods:
 
 **Purpose**: Clean up any resources (browsers, connections, etc.) used by the API.
 
-#### Implementation Requirements
-
-- **Language Filtering**: Filter results to match the specified language preference
-- **Price Parsing**: Convert price strings to float values
-- **Country Extraction**: Extract and normalize country information from listings
-- **Error Handling**: Handle missing listings, network errors, and parsing failures gracefully
-- **Resource Management**: Properly clean up resources in the `close()` method
-- **Duplicate Handling**: Handle duplicate listings appropriately
-
 #### Usage Pattern
 
 The main script expects to use your Card API as follows:
@@ -132,7 +127,7 @@ finally:
 
 ## Usage
 
-Once you have implemented both APIs according to the specifications above, you can use the main script:
+Once you have a shipping and card API according to the specifications above, you can use the main script:
 
 ```bash
 # Scrape card data

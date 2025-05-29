@@ -26,7 +26,6 @@ DESIRED_CARDS = [
     "Bristling Backwoods",
     "Canopy Vista",
     "Carpet of Flowers",
-    "Cavern of Souls",
     "Chromatic Lantern",
     "City of Brass",
     "Cloudshredder Sliver",
@@ -50,7 +49,6 @@ DESIRED_CARDS = [
     "Fleshwrither",
     "Flusterstorm",
     "Forbidden Orchard",
-    "Forest",
     "Frontier Bivouac",
     "Galerider Sliver",
     "Gemhide Sliver",
@@ -61,7 +59,6 @@ DESIRED_CARDS = [
     "Holdout Settlement",
     "Homing Sliver",
     "Ignoble Hierarch",
-    "Island",
     "Jungle Shrine",
     "Kodama's Reach",
     "Lavabelly Sliver",
@@ -69,7 +66,6 @@ DESIRED_CARDS = [
     "Meteor Crater",
     "Mirage Mesa",
     "Morophon, the Boundless",
-    "Mountain",
     "Mystic Monastery",
     "Nature's Claim",
     "Necrotic Sliver",
@@ -81,7 +77,6 @@ DESIRED_CARDS = [
     "Path of Ancestry",
     "Pillar of the Paruns",
     "Pit of Offerings",
-    "Plains",
     "Rhystic Cave",
     "Rhystic Tutor",
     "Rhythm of the Wild",
@@ -98,7 +93,6 @@ DESIRED_CARDS = [
     "Sliver Hivelord",
     "Sol Ring",
     "Survivors' Encampment",
-    "Swamp",
     "Swords to Plowshares",
     "The Creation of Avacyn",
     "Training Grounds",
@@ -371,7 +365,7 @@ def create_sellers_dataframe(listings: pd.DataFrame, card_names: list[str]) -> t
 
 
 def parse_raw_data(raw_data: list[dict], previous_listings: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-    # Parses the raw data from the scraper and returns a dataframe with the following columns:
+    # Parses the raw data from the CardApi and returns a dataframe with the following columns:
     # - seller
     # - card_name
     # - price
@@ -421,11 +415,11 @@ def parse_raw_data(raw_data: list[dict], previous_listings: pd.DataFrame = pd.Da
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Card Market Scraper and Analyzer")
+    parser = argparse.ArgumentParser(description="Card Api and Analyzer")
     parser.add_argument(
-        "--scrape",
+        "--gather",
         action="store_true",
-        help="Scrape the web for cards and save the filtered results to ./filtered_df.csv"
+        help="Gather data for the cards and save the filtered results to ./listings_df.csv"
     )
     parser.add_argument(
         "--find-cheapest",
@@ -455,7 +449,7 @@ def main():
 
     card_names = [card.lower() for card in DESIRED_CARDS]
     card_names = list(set(card_names))
-    scrape_card_names = card_names.copy()
+    gather_card_names = card_names.copy()
     
     listings_df = pd.DataFrame()
     raw_data = []
@@ -464,14 +458,14 @@ def main():
         print(f"--- Loading listings from: {args.listings_path} ---")
         listings_df = pd.read_csv(args.listings_path)
         # We also want to filter out card_names to only include the cards that are not in the listings_df
-        scrape_card_names = [card for card in DESIRED_CARDS if card not in listings_df['card_name'].values]
+        gather_card_names = [card for card in DESIRED_CARDS if card not in listings_df['card_name'].values]
 
         
-    if args.scrape:
-        # Scrape more data
+    if args.gather:
+        # Gather more data
         api = CardApi()
-        print("CardMarket Scraper initialized.")
-        raw_data = api.gather_data(scrape_card_names)
+        print("CardApi initialized.")
+        raw_data = api.gather_data(gather_card_names)
         api.close()
     
         # Add new listings to the listings dataframe
@@ -497,7 +491,7 @@ def main():
         # Filter out sellers
         filtered_df = filter_sellers_df(sellers_df, found_cards)
 
-        print(f"Filtered out to {len(filtered_df)} unique sellers after filtering.")
+        print(f"Filtered out to {len(filtered_df)} unique sellers.")
         
         # Load the shipping dictionary
         shipping_dict = None

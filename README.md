@@ -16,7 +16,7 @@ This is built for python version 3.12.9, and might not work with other versions.
 pip install -r requirement.txt
 ```
 
-For browser-functionality (currently in the CardMarket "api"), we need to install Playwrights dependencies using
+For browser-functionality (currently in the CardMarket "api"), Playwrights dependencies also need to be installed, which can be done using
 
 ```
 playwright install

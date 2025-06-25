@@ -1,0 +1,9 @@
+# Core dependencies for main script
+pandas>=2.0.0
+numpy>=1.24.0
+tqdm>=4.65.0
+
+# API dependencies for web scraping and HTTP requests
+playwright>=1.40.0
+requests>=2.31.0
+readchar>=4.0.0 

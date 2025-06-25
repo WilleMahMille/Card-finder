@@ -9,9 +9,87 @@ import argparse
 import numpy as np
 
 
+
 # --- Configuration ---
-# List of card names you want to acquire
+
 DESIRED_CARDS = [
+    "Fblthp, Lost on the Range",
+    "Accorder's Shield",
+    "Aether Barrier",
+    "Aetherflux Reservoir",
+    "Ancestral Vision",
+    "Arcane Signet",
+    "Bone Saw",
+    "Brainstorm",
+    "Buried Ruin",
+    "Cathar's Shield",
+    "Claws of Gix",
+    "Codex Shredder",
+    "Counterspell",
+    "Cursed Totem",
+    "Dark Sphere",
+    "Darksteel Relic",
+    "Decanter of Endless Water",
+    "Dig Through Time",
+    "Dreamscape Artist",
+    "Dress Down",
+    "Etherium Sculptor",
+    "Everflowing Chalice",
+    "Eye of Ramos",
+    "Fabricate",
+    "Fellwar Stone",
+    "Fog Bank",
+    "Fountain of Youth",
+    "Gilded Lotus",
+    "Helm of Awakening",
+    "Herbal Poultice",
+    "High Tide",
+    "Index",
+    "Inevitable Betrayal",
+    "Kite Shield",
+    "Kuldotha Forgemaster",
+    "Lantern of Insight",
+    "Lotus Bloom",
+    "Loyal Inventor",
+    "Mind Stone",
+    "Minds Aglow",
+    "Mishra's Bauble",
+    "Misleading Signpost",
+    "Mystic Sanctuary",
+    "Narset, Parter of Veils",
+    "Obsessive Search",
+    "Ornithopter",
+    "Paradise Mantle",
+    "Phyrexian Walker",
+    "Ponder",
+    "Preordain",
+    "Propaganda",
+    "Pyramid of the Pantheon",
+    "Reliquary Tower",
+    "Reshape",
+    "Retract",
+    "Search for Azcanta // Azcanta, the Sunken Ruin",
+    "Sol Ring",
+    "Sol Talisman",
+    "Spell Pierce",
+    "Spellbook",
+    "Spidersilk Net",
+    "Springleaf Drum",
+    "Stonecoil Serpent",
+    "The Reality Chip",
+    "Thought Vessel",
+    "Thran Dynamo",
+    "Tormod's Crypt",
+    "Transmutation Font",
+    "Triton Wavebreaker",
+    "Welding Jar",
+    "Whispers of the Muse",
+    "Winter Moon",
+    "Zuran Orb"
+]
+
+# List of card names you want to acquire
+sliver_DESIRED_CARDS = [
     "Sliver Overlord",
     "Amoeboid Changeling",
     "Ancient Ziggurat",
@@ -322,7 +400,7 @@ def create_sellers_dataframe(listings: pd.DataFrame, card_names: list[str]) -> t
 
     found_cards = {}
     for listing in listings.iterrows():
-        card_name = listing[1]['card_name'].lower()
+        card_name = str(listing[1]['card_name']).lower()
         if card_name not in card_names:
             continue
         found_cards[card_name] = True
@@ -335,7 +413,7 @@ def create_sellers_dataframe(listings: pd.DataFrame, card_names: list[str]) -> t
     for listing in listings.iterrows():
         seller = listing[1]['seller']
         card_price = listing[1]['price']
-        card_name = listing[1]['card_name'].lower()
+        card_name = str(listing[1]['card_name']).lower()
         if card_name not in card_names:
             # We don't add cards that we are not looking for. 
             continue
@@ -503,11 +581,13 @@ def main():
         if not shipping_dict:
             print(f"No shipping dictionary provided, scraping shipping prices for {TO_COUNTRY}")
             shipping_dict = ShippingApi.get_shipping_prices(TO_COUNTRY)
-            print(f"Saving shipping dictionary to {args.shipping_dict_path}")
+            
             if args.shipping_dict_path: 
+                print(f"Saving shipping dictionary to {args.shipping_dict_path}")
                 with open(args.shipping_dict_path, 'w') as f:
                     json.dump(shipping_dict, f)
             else:
+                print(f"No shipping dictionary provided, saving to shipping_dict.json")
                 with open("shipping_dict.json", 'w') as f:
                     json.dump(shipping_dict, f)
     

@@ -227,6 +227,9 @@ class CardApi:
             if "language" not in query_params:
                 query_params["language"] = ["1"]      # English cards
                 modified = True
+            if "minCondition" not in query_params:
+                query_params["minCondition"] = ["2"]
+                modified = True
             
             if modified:
                 # Rebuild the query string
@@ -380,15 +383,19 @@ class CardApi:
         Returns a list of cards that have not been scraped yet.
         """
         unscraped_cards = card_names.copy()
+        indices_to_remove = []
         
         for scraped_card in self.listings_data.keys():
-            for card_name in card_names:
+            for index, card_name in enumerate(card_names):
                 parsed_card_name = self._parse_card_name_search(card_name)
                 parsed_scraped_card = self._parse_card_name_search(scraped_card)
                 if parsed_scraped_card.startswith(parsed_card_name):
                     # Scraped card
-                    unscraped_cards.remove(card_name)
+                    indices_to_remove.append(index)
                     break
+        for index in reversed(indices_to_remove):
+            unscraped_cards.pop(index)
+
         print(f"Number of unscraped cards: {len(unscraped_cards)}")
         print(f"unscraped cards: {unscraped_cards}")
         print(f"scraped cards: {self.listings_data.keys()}")
@@ -468,7 +475,7 @@ class CardApi:
             print("'r' to restart the browser")
             action = input()
             if action == 's':
-                return self._format_listings()
+                return self._format_listings(card_names)
             elif action == 'a':
                 # update the card names to scrape
                 cards_to_scrape = self._get_unscraped_cards(card_names)
@@ -521,7 +528,7 @@ class CardApi:
                             cards_to_scrape = self._get_unscraped_cards(card_names)
                             if automatic_error_count > max_automatic_errors:
                                 print(f"Quitting after getting {automatic_error_count} errors")
-                                return self._format_listings()
+                                return self._format_listings(card_names)
                             automatic_error_count += 1
                             break
                         
@@ -541,14 +548,22 @@ class CardApi:
                         print(f"Error gathering data: {e}")
                     time.sleep(0.5)
     
-    def _format_listings(self):
+    def _format_listings(self, card_names):
         """Formats the listings data into a list of dictionaries."""
         listings = []
-        for card_name, sellers in self.listings_data.items():
+        for parsed_card_name, sellers in self.listings_data.items():
             for seller, data in sellers.items():
+                unparsed_card_name = None
+                for original_card_name in card_names:
+                    if self._parse_card_name_dict(original_card_name) == self._parse_card_name_dict(parsed_card_name):
+                        unparsed_card_name = original_card_name
+                        break
+
+                if not unparsed_card_name:
+                    print(f"Warning: No unparsed card name found for {parsed_card_name}")
                 listings.append({
                     "seller": seller,
-                    "card_name": card_name,
+                    "card_name": unparsed_card_name,
                     "price": data["price"],
                     "country": data["country"],
                     "link": data["link"]

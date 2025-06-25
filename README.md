@@ -8,7 +8,7 @@ This is a combined repository for various tools for finding, buying and trading 
 
 ## How to use
 
-### Installations
+### Installation
 
 This is built for python version 3.12.9, and might not work with other versions. Each subfolder includes a requirements.txt file that you can install using
 

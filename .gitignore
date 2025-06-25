@@ -5,7 +5,14 @@
 
 *.csv
 *.json
+
+
+**/__pycache__
+# Exclude all .txt files except requirement files
 *.txt
+!requirements.txt
+!requirements-main.txt
+!requirements-api.txt
 
-/dragonslair/
 
+.DS_Store

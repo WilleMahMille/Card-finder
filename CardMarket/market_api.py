@@ -10,7 +10,7 @@ import threading
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 # Constants
-SHIPPING_MAX_VALUE = 100
+SHIPPING_MAX_VALUE = 1000
 
 # Enum for countries
 class Countries(Enum):
@@ -300,10 +300,10 @@ class CardApi:
                 card_name_element = row_element.query_selector("a[href*='/Products/Singles/']")
                 if card_name_element:
                     card_name = card_name_element.text_content().strip()
-                
+
                 if not card_name:
                     card_name = self.page.url.split("?")[0].split("/")[-1].replace("-", " ").replace("_", " ")
-                
+                    
                 if '/Products/Singles/' in current_url:
                     # Extract seller name
                     seller_element = row_element.query_selector("div.col-sellerProductInfo span.seller-name a[href*='/Users/']")
@@ -370,13 +370,13 @@ class CardApi:
         """
         Parses a card name to a format that can be used for searching.
         """
-        return card_name.lower().replace(" ", "+").replace("'", "%27")
+        return card_name.lower().replace(" ", "+").replace("'", "%27").replace(",", "")
     
     def _parse_card_name_dict(self, card_name: str):
         """
         Parses a found card name and an inputed card name to the same format.
         """
-        return card_name.lower().replace(" ", "").replace("'", "")
+        return card_name.lower().replace(" ", "").replace("'", "").replace(',', '').replace('-', '')
 
     def _get_unscraped_cards(self, card_names: list[str]):
         """
@@ -387,18 +387,18 @@ class CardApi:
         
         for scraped_card in self.listings_data.keys():
             for index, card_name in enumerate(card_names):
-                parsed_card_name = self._parse_card_name_search(card_name)
-                parsed_scraped_card = self._parse_card_name_search(scraped_card)
+                parsed_card_name = self._parse_card_name_dict(card_name)
+                parsed_scraped_card = self._parse_card_name_dict(scraped_card)
                 if parsed_scraped_card.startswith(parsed_card_name):
                     # Scraped card
                     indices_to_remove.append(index)
                     break
+        
         for index in reversed(indices_to_remove):
             unscraped_cards.pop(index)
 
         print(f"Number of unscraped cards: {len(unscraped_cards)}")
         print(f"unscraped cards: {unscraped_cards}")
-        print(f"scraped cards: {self.listings_data.keys()}")
         return unscraped_cards
 
     def _search_card(self, card_name: str):
@@ -534,6 +534,7 @@ class CardApi:
                         
                         time.sleep(random.uniform(0.5, 1.5))
                     print("--------------------------------")
+                    cards_to_scrape = self._get_unscraped_cards(card_names)
                     if len(cards_to_scrape) == 0:
                         print("No more cards to scrape, returning to menu")
                         break

@@ -79,7 +79,7 @@ def main():
   if args.tradable_cards:
     tradable_cards = load_cards_from_file(args.tradable_cards)
   else:
-    BASE_URL = "https://old.dragonslair.se/category/444/loskort"
+    BASE_URL = "https://list.dragonslair.se/product/tag/card-singles/magic/sort:price"
     tradable_cards = search_sets_for_tradable_cards(BASE_URL)
     tradable_cards = parse_to_dataframe(tradable_cards)
     tradable_cards.to_csv("tradable_cards.csv", index=False)

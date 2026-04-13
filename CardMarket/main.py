@@ -1,692 +1,1263 @@
 import hashlib
 import json
 import os
+import sys
+import glob
+import traceback
+from datetime import datetime
+from functools import wraps
+
 import tqdm
+from card_editor import edit_card_list
+from card_import import CardImportError, import_from_moxfield, parse_decklist
 from market_api import CardApi, ShippingApi
 from collections import defaultdict
 import pandas as pd
-import argparse 
+import argparse
 import numpy as np
 
 
+# =============================================================================
+# Configuration Constants
+# =============================================================================
 
-# --- Configuration ---
-
-DESIRED_CARDS = [
-    "Anzrag, the Quake-Mole",
-    "Alena, Kessig Trapper",
-    "Ancestors' Aid",
-    "Anger",
-    "Arbor Adherent",
-    "Arbor Elf",
-    "Arcane Signet",
-    "Axiom Engraver",
-    "Beastcaller Savant",
-    "Bighorner Rancher",
-    "Black Market Tycoon",
-    "Blossoming Defense",
-    "Boots of Speed",
-    "Boreal Druid",
-    "Bramble Familiar",
-    "Brazen Collector",
-    "Bugenhagen, Wise Elder",
-    "Captain Lannery Storm",
-    "Careful Cultivation",
-    "Channeler Initiate",
-    "Citanul Stalwart",
-    "Collective Resistance",
-    "Compelled Duel",
-    "Diamond Pick-Axe",
-    "Emblem of the Warmind",
-    "Emergent Growth",
-    "Escape Velocity",
-    "Fires of Yavimaya",
-    "Fury of the Horde",
-    "Gaea's Gift",
-    "Gilded Ghoda",
-    "Grim Reaper's Sprint",
-    "Hansk, Slayer Zealot",
-    "Heart Warden",
-    "Hidden Footblade",
-    "Hoarding Ogre",
-    "Horrid Vigor",
-    "Invigorating Hot Spring",
-    "Irresistible Prey",
-    "Keen Sense",
-    "King Harald's Revenge",
-    "Last Night Together",
-    "Llanowar Visionary",
-    "Mana Cache",
-    "Marching Duodrone",
-    "Mass Hysteria",
-    "Mirror Shield",
-    "Mortal's Resolve",
-    "Port Razer",
-    "Roar of Challenge",
-    "Shiny Impetus",
-    "Snake Umbra",
-    "Snakeskin Veil",
-    "Sol Ring",
-    "Star Athlete",
-    "Tamiyo's Safekeeping",
-    "The Masamune",
-    "Tyvar's Stand",
-    "Withstand Death",
-]
-
-fplhp_DESIRED_CARDS = [
-    "Fblthp, Lost on the Range",
-    "Accorder's Shield",
-    "Aether Barrier",
-    "Aetherflux Reservoir",
-    "Ancestral Vision",
-    "Arcane Signet",
-    "Bone Saw",
-    "Brainstorm",
-    "Buried Ruin",
-    "Cathar's Shield",
-    "Claws of Gix",
-    "Codex Shredder",
-    "Counterspell",
-    "Cursed Totem",
-    "Dark Sphere",
-    "Darksteel Relic",
-    "Decanter of Endless Water",
-    "Dig Through Time",
-    "Dreamscape Artist",
-    "Dress Down",
-    "Etherium Sculptor",
-    "Everflowing Chalice",
-    "Eye of Ramos",
-    "Fabricate",
-    "Fellwar Stone",
-    "Fog Bank",
-    "Fountain of Youth",
-    "Gilded Lotus",
-    "Helm of Awakening",
-    "Herbal Poultice",
-    "High Tide",
-    "Index",
-    "Inevitable Betrayal",
-    "Kite Shield",
-    "Kuldotha Forgemaster",
-    "Lantern of Insight",
-    "Lotus Bloom",
-    "Loyal Inventor",
-    "Mind Stone",
-    "Minds Aglow",
-    "Mishra's Bauble",
-    "Misleading Signpost",
-    "Mystic Sanctuary",
-    "Narset, Parter of Veils",
-    "Obsessive Search",
-    "Ornithopter",
-    "Paradise Mantle",
-    "Phyrexian Walker",
-    "Ponder",
-    "Preordain",
-    "Propaganda",
-    "Pyramid of the Pantheon",
-    "Reliquary Tower",
-    "Reshape",
-    "Retract",
-    "Search for Azcanta // Azcanta, the Sunken Ruin",
-    "Sol Ring",
-    "Sol Talisman",
-    "Spell Pierce",
-    "Spellbook",
-    "Spidersilk Net",
-    "Springleaf Drum",
-    "Stonecoil Serpent",
-    "The Reality Chip",
-    "Thought Vessel",
-    "Thran Dynamo",
-    "Tormod's Crypt",
-    "Transmutation Font",
-    "Triton Wavebreaker",
-    "Welding Jar",
-    "Whispers of the Muse",
-    "Winter Moon",
-    "Zuran Orb"
-]
-
-# List of card names you want to acquire
-sliver_DESIRED_CARDS = [
-    "Sliver Overlord",
-    "Amoeboid Changeling",
-    "Ancient Ziggurat",
-    "Arcane Sanctum",
-    "Arcane Signet",
-    "Assassin's Trophy",
-    "Basal Sliver",
-    "Birds of Paradise",
-    "Bloom Tender",
-    "Bonescythe Sliver",
-    "Brainstorm",
-    "Bristling Backwoods",
-    "Canopy Vista",
-    "Carpet of Flowers",
-    "Chromatic Lantern",
-    "City of Brass",
-    "Cloudshredder Sliver",
-    "Coat of Arms",
-    "Command Tower",
-    "Counterspell",
-    "Credit Voucher",
-    "Crumbling Necropolis",
-    "Crypt Sliver",
-    "Cryptolith Rite",
-    "Crystalline Sliver",
-    "Darkmoss Bridge",
-    "Delay",
-    "Diffusion Sliver",
-    "Door of Destinies",
-    "Eladamri's Call",
-    "Eldritch Evolution",
-    "Exotic Orchard",
-    "Farseek",
-    "Fellwar Stone",
-    "Fleshwrither",
-    "Flusterstorm",
-    "Forbidden Orchard",
-    "Frontier Bivouac",
-    "Galerider Sliver",
-    "Gemhide Sliver",
-    "Harmonic Sliver",
-    "Hatchery Sliver",
-    "Heart Sliver",
-    "Hibernation Sliver",
-    "Holdout Settlement",
-    "Homing Sliver",
-    "Ignoble Hierarch",
-    "Jungle Shrine",
-    "Kodama's Reach",
-    "Lavabelly Sliver",
-    "Manaweft Sliver",
-    "Meteor Crater",
-    "Mirage Mesa",
-    "Morophon, the Boundless",
-    "Mystic Monastery",
-    "Nature's Claim",
-    "Necrotic Sliver",
-    "Neoform",
-    "Night Market",
-    "Nomad Outpost",
-    "Opulent Palace",
-    "Parallel Thoughts",
-    "Path of Ancestry",
-    "Pillar of the Paruns",
-    "Pit of Offerings",
-    "Rhystic Cave",
-    "Rhystic Tutor",
-    "Rhythm of the Wild",
-    "Ringsight",
-    "Root Sliver",
-    "Sandsteppe Citadel",
-    "Savage Lands",
-    "Seaside Citadel",
-    "Secluded Courtyard",
-    "Sedge Sliver",
-    "Sentinel Sliver",
-    "Shifting Sliver",
-    "Sliver Hive",
-    "Sliver Hivelord",
-    "Sol Ring",
-    "Survivors' Encampment",
-    "Swords to Plowshares",
-    "The Creation of Avacyn",
-    "Training Grounds",
-    "Uncharted Haven",
-    "Unclaimed Territory",
-    "Urza's Incubator",
-    "Utopia Sprawl",
-    "Valgavoth's Lair",
-    "Wheel of Misfortune",
-    "Wishclaw Talisman"
-]
+RESOURCES_DIR = os.path.join(os.path.dirname(__file__), "Resources")
+DESIRED_CARDS_DIR = os.path.join(RESOURCES_DIR, "DesiredCards")
+LISTINGS_DIR = os.path.join(RESOURCES_DIR, "Listings")
 
 TO_COUNTRY = "sweden"
-
 LANGUAGE = "English"
-
-# Check only the first product match by default
-# Set to a higher number (e.g., 3) to check more versions if available
-# This will increase scraping time.
 MAX_PRODUCT_VERSIONS_TO_CHECK = 1
 
 
-def calculate_shipping_price(filtered_df: pd.DataFrame, shipping_dict: dict, previous_node_path: list, current_node_index: int, current_value: float, value_increase: float):
+# =============================================================================
+# Error Handling Utilities
+# =============================================================================
 
-    # This function calculates the shipping price, or increase in shipping price for a given seller/node. 
-    # Since the shipping price increases with the value of the cards (at certain rates), we have the following scenarios:
-    # - The current seller is already in the path, and the value of the cards does not reach the threshold for increased shipping.
-    # - The current seller is already in the path, and the value of the cards does reach the threshold for increased shipping.
-    # - The current seller is not in the path, meaning that the shipping price threshhold is the value increase of the cards.
+class CardMarketError(Exception):
+    """Custom exception for CardMarket tool errors."""
+    pass
 
-    # We should first determine the country of the sellers so we can get the shipping price list for that country. 
-    country = filtered_df.iloc[current_node_index]['country']
-    shipping_price_list = shipping_dict[country.upper().replace(" ", "_")]
 
-    # We should then calculate if the new value increases the shipping price, and by how much. 
-    # We do this by iterating over the shipping price list and checking if the value increase is greater than the shipping price. Note that the list has the following format:
-    # {
-    #     "price": parsed_price,
-    #     "maxValue": parsed_max_value,
-    # } 
-    
-    previous_shipping_price = shipping_price_list[0]['price']
-    new_shipping_price = previous_shipping_price
-    for i, shipping_price in enumerate(shipping_price_list):
-        if current_value > shipping_price['maxValue']:
-            previous_shipping_price = shipping_price['price']
-            new_shipping_price = shipping_price['price']
-        elif current_value + value_increase > shipping_price['maxValue']:
-            new_shipping_price = shipping_price['price']
-        else:
-            break
-    shipping_price_increase = new_shipping_price - previous_shipping_price
-    
-    # Now we want to check if the new seller is in the path, and if so, we want to add the shipping price increase to the total shipping price.
-    # Otherwise, we want to add the shipping price increase to the total shipping price.
-    if current_node_index in previous_node_path:
-        shipping_price = shipping_price_increase
+class Colors:
+    """ANSI color codes for terminal output."""
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[96m'
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+
+
+def print_error(message: str):
+    """Print error message in red."""
+    print(f"{Colors.RED}[ERROR] {message}{Colors.RESET}")
+
+
+def print_warning(message: str):
+    """Print warning message in yellow."""
+    print(f"{Colors.YELLOW}[WARNING] {message}{Colors.RESET}")
+
+
+def print_success(message: str):
+    """Print success message in green."""
+    print(f"{Colors.GREEN}[SUCCESS] {message}{Colors.RESET}")
+
+
+def print_info(message: str):
+    """Print info message in cyan."""
+    print(f"{Colors.CYAN}[INFO] {message}{Colors.RESET}")
+
+
+def safe_execute(func):
+    """Decorator to wrap functions with error handling."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except CardMarketError as e:
+            print_error(str(e))
+            return None
+        except FileNotFoundError as e:
+            print_error(f"File not found: {e.filename}")
+            return None
+        except pd.errors.EmptyDataError:
+            print_error("The file is empty or has no valid data.")
+            return None
+        except json.JSONDecodeError as e:
+            print_error(f"Invalid JSON format: {e.msg}")
+            return None
+        except Exception as e:
+            print_error(f"Unexpected error: {str(e)}")
+            print_error(f"Traceback:\n{traceback.format_exc()}")
+            return None
+    return wrapper
+
+
+# =============================================================================
+# File Management Functions
+# =============================================================================
+
+def get_available_card_lists() -> list[tuple[str, str]]:
+    """
+    Scan DesiredCards directory for available CSV files.
+    Returns list of tuples: (display_name, full_path)
+    """
+    if not os.path.exists(DESIRED_CARDS_DIR):
+        print_warning(f"DesiredCards directory not found: {DESIRED_CARDS_DIR}")
+        return []
+
+    csv_files = glob.glob(os.path.join(DESIRED_CARDS_DIR, "*.csv"))
+    result = []
+    for filepath in sorted(csv_files):
+        filename = os.path.basename(filepath)
+        display_name = os.path.splitext(filename)[0]
+        result.append((display_name, filepath))
+    return result
+
+
+def get_available_listings() -> list[tuple[str, str]]:
+    """
+    Scan Listings directory for available CSV files.
+    Returns list of tuples: (display_name, full_path)
+    """
+    if not os.path.exists(LISTINGS_DIR):
+        print_warning(f"Listings directory not found: {LISTINGS_DIR}")
+        return []
+
+    csv_files = glob.glob(os.path.join(LISTINGS_DIR, "*.csv"))
+    result = []
+    for filepath in sorted(csv_files, reverse=True):  # Most recent first
+        filename = os.path.basename(filepath)
+        display_name = os.path.splitext(filename)[0]
+        result.append((display_name, filepath))
+    return result
+
+
+@safe_execute
+def load_desired_cards(path: str) -> list[str]:
+    """
+    Load desired cards from a CSV file.
+    Expects a CSV with a 'card_name' column or single column of card names.
+    """
+    if not os.path.exists(path):
+        raise CardMarketError(f"Card list file not found: {path}")
+
+    df = pd.read_csv(path)
+
+    if 'card_name' in df.columns:
+        cards = df['card_name'].dropna().tolist()
+    elif len(df.columns) == 1:
+        cards = df.iloc[:, 0].dropna().tolist()
     else:
-        shipping_price = new_shipping_price
-    
-    
-    return shipping_price
-
-def find_cheapest_seller_group(filtered_df: pd.DataFrame, shipping_dict: dict, desired_cards_set: set):
-    
-    sorted_desired_cards_set = sorted(list(desired_cards_set))
-    
-    # For this algorithm, we first create an adjacency matrix of size | sellers | x | desired cards | 
-    # where the value of edge[i][j] is the price of buying card j from seller i. Note that this does not include shipping costs.
-    # We then use a greedy algorithm to find the minimum cost set of sellers that covers all desired cards.
-
-    # Create adjacency matrix
-    adjacency_matrix = np.zeros((len(filtered_df), len(sorted_desired_cards_set)))
-    for i, row in filtered_df.iterrows():
-        for j, card in enumerate(sorted_desired_cards_set):
-            if pd.notna(row[card]):
-                adjacency_matrix[i][j] = row[card]
-            else:
-                adjacency_matrix[i][j] = float('inf')
-    
-    # Now we want empty nodes the size of | sellers | x | desired cards |
-    # where each node has the cheapest price, and the cheapest path to this node. 
-
-    path_matrix = [[(float('inf'), []) for _ in range(len(sorted_desired_cards_set))] for _ in range(len(filtered_df))]
-
-    # initiate first column of path matrix
-    for i in range(len(filtered_df)):
-        shipping_price = calculate_shipping_price(
-            filtered_df=filtered_df, 
-            shipping_dict=shipping_dict,
-            previous_node_path=[], 
-            current_node_index=i, 
-            current_value=0, 
-            value_increase=adjacency_matrix[i][0]
+        raise CardMarketError(
+            f"Invalid card list format. Expected 'card_name' column or single column. "
+            f"Found columns: {list(df.columns)}"
         )
-        path_matrix[i][0] = (adjacency_matrix[i][0] + shipping_price, [i])
-    # We then iterate over all columns of the adjacency matrix and update the path matrix if the value is lower than the current value
 
-    for j in tqdm.tqdm(range(1, len(sorted_desired_cards_set))):
+    cards = [str(card).strip() for card in cards if str(card).strip()]
+    print_success(f"Loaded {len(cards)} cards from {os.path.basename(path)}")
+    return cards
+
+
+@safe_execute
+def load_listings(path: str) -> pd.DataFrame:
+    """Load listings from a CSV file."""
+    if not os.path.exists(path):
+        raise CardMarketError(f"Listings file not found: {path}")
+
+    df = pd.read_csv(path)
+    required_columns = {'seller', 'card_name', 'price', 'country', 'link'}
+
+    if not required_columns.issubset(set(df.columns)):
+        missing = required_columns - set(df.columns)
+        raise CardMarketError(f"Listings file missing required columns: {missing}")
+
+    print_success(f"Loaded {len(df)} listings from {os.path.basename(path)}")
+    return df
+
+
+def save_listings(df: pd.DataFrame, name: str = None) -> str:
+    """
+    Save listings to a CSV file in the Listings directory.
+    Uses format: listings_df_YYYYMMDD.out.csv or listings_df_<name>.out.csv
+    Returns the path to the saved file.
+    """
+    if not os.path.exists(LISTINGS_DIR):
+        os.makedirs(LISTINGS_DIR)
+
+    if name:
+        filename = f"listings_df_{name}.out.csv"
+    else:
+        date_str = datetime.now().strftime("%Y%m%d")
+        filename = f"listings_df_{date_str}.out.csv"
+
+    filepath = os.path.join(LISTINGS_DIR, filename)
+
+    try:
+        df.to_csv(filepath, index=False)
+        print_success(f"Saved {len(df)} listings to {filename}")
+        return filepath
+    except Exception as e:
+        print_error(f"Failed to save listings: {str(e)}")
+        return None
+
+
+# =============================================================================
+# Core Algorithm Functions
+# =============================================================================
+
+def calculate_shipping_price(
+    filtered_df: pd.DataFrame,
+    shipping_dict: dict,
+    previous_node_path: list,
+    current_node_index: int,
+    current_value: float,
+    value_increase: float
+) -> float:
+    """
+    Calculate the shipping price or increase in shipping price for a given seller/node.
+
+    Since shipping price increases with card value at certain rates, we handle:
+    - Current seller already in path, value doesn't reach new threshold
+    - Current seller already in path, value reaches new threshold
+    - Current seller not in path (shipping = new threshold based on value_increase)
+    """
+    try:
+        country = filtered_df.iloc[current_node_index]['country']
+        country_key = country.upper().replace(" ", "_")
+
+        if country_key not in shipping_dict:
+            print_warning(f"No shipping data for country: {country}")
+            return 0.0
+
+        shipping_price_list = shipping_dict[country_key]
+
+        previous_shipping_price = shipping_price_list[0]['price']
+        new_shipping_price = previous_shipping_price
+
+        for shipping_price in shipping_price_list:
+            if current_value > shipping_price['maxValue']:
+                previous_shipping_price = shipping_price['price']
+                new_shipping_price = shipping_price['price']
+            elif current_value + value_increase > shipping_price['maxValue']:
+                new_shipping_price = shipping_price['price']
+            else:
+                break
+
+        shipping_price_increase = new_shipping_price - previous_shipping_price
+
+        if current_node_index in previous_node_path:
+            return shipping_price_increase
+        else:
+            return new_shipping_price
+
+    except Exception as e:
+        print_error(f"Error calculating shipping price: {str(e)}")
+        return 0.0
+
+
+def find_cheapest_seller_group(
+    filtered_df: pd.DataFrame,
+    shipping_dict: dict,
+    desired_cards_set: set
+) -> tuple[dict, float]:
+    """
+    Find the optimal combination of sellers to minimize total cost.
+
+    Uses dynamic programming to find the minimum cost path through sellers
+    that covers all desired cards.
+
+    Returns:
+        tuple: (optimal_seller_groups dict, minimum_cost float)
+    """
+    try:
+        sorted_desired_cards_set = sorted(list(desired_cards_set))
+
+        # Create adjacency matrix: sellers x cards
+        adjacency_matrix = np.zeros((len(filtered_df), len(sorted_desired_cards_set)))
+        for i, row in filtered_df.iterrows():
+            for j, card in enumerate(sorted_desired_cards_set):
+                if pd.notna(row[card]):
+                    adjacency_matrix[i][j] = row[card]
+                else:
+                    adjacency_matrix[i][j] = float('inf')
+
+        # Path matrix: (cost, path) for each seller-card combination
+        path_matrix = [[(float('inf'), []) for _ in range(len(sorted_desired_cards_set))]
+                       for _ in range(len(filtered_df))]
+
+        # Initialize first column
         for i in range(len(filtered_df)):
-            (previous_node_price, previous_node_path) = path_matrix[i][j-1]
-            for k in range(len(filtered_df)):
-                (node_price, node_path) = path_matrix[k][j]
-                if adjacency_matrix[k][j] == float('inf'):
-                    continue
-                price = previous_node_price
-                price += calculate_shipping_price(
-                    filtered_df=filtered_df, 
-                    shipping_dict=shipping_dict,
-                    previous_node_path=previous_node_path, 
-                    current_node_index=k, 
-                    current_value=price, 
-                    value_increase=adjacency_matrix[k][j]
-                )
-                price += adjacency_matrix[k][j]
-                
-                if price < node_price:
-                    path_matrix[k][j] = (price, previous_node_path + [k])
-    
-    # Now we find the minimum cost path
-    min_cost = float('inf')
-    min_path = []
-    for i in range(len(filtered_df)):
-        if path_matrix[i][-1][0] < min_cost:
-            min_cost = path_matrix[i][-1][0]
-            min_path = path_matrix[i][-1][1]
-    
-    print(f"Minimum cost path: {min_path} with cost {min_cost}")
-    print(f"Sellers in path: {[filtered_df.iloc[i]['seller'] for i in min_path]}") 
+            shipping_price = calculate_shipping_price(
+                filtered_df=filtered_df,
+                shipping_dict=shipping_dict,
+                previous_node_path=[],
+                current_node_index=i,
+                current_value=0,
+                value_increase=adjacency_matrix[i][0]
+            )
+            path_matrix[i][0] = (adjacency_matrix[i][0] + shipping_price, [i])
 
-    # Should return a dictionary of seller names as keys, and a list of card names as values
-    optimal_seller_groups = defaultdict(list)
-    for i in range(len(min_path)):
-        optimal_seller_groups[filtered_df.iloc[min_path[i]]['seller']].append(sorted_desired_cards_set[i])
-    return optimal_seller_groups, min_cost
+        # Dynamic programming: iterate through cards
+        for j in tqdm.tqdm(range(1, len(sorted_desired_cards_set)), desc="Optimizing"):
+            for i in range(len(filtered_df)):
+                (previous_node_price, previous_node_path) = path_matrix[i][j-1]
+                for k in range(len(filtered_df)):
+                    (node_price, node_path) = path_matrix[k][j]
+                    if adjacency_matrix[k][j] == float('inf'):
+                        continue
+
+                    price = previous_node_price
+                    price += calculate_shipping_price(
+                        filtered_df=filtered_df,
+                        shipping_dict=shipping_dict,
+                        previous_node_path=previous_node_path,
+                        current_node_index=k,
+                        current_value=price,
+                        value_increase=adjacency_matrix[k][j]
+                    )
+                    price += adjacency_matrix[k][j]
+
+                    if price < node_price:
+                        path_matrix[k][j] = (price, previous_node_path + [k])
+
+        # Find minimum cost path
+        min_cost = float('inf')
+        min_path = []
+        for i in range(len(filtered_df)):
+            if path_matrix[i][-1][0] < min_cost:
+                min_cost = path_matrix[i][-1][0]
+                min_path = path_matrix[i][-1][1]
+
+        print_info(f"Minimum cost: {min_cost:.2f}")
+        print_info(f"Sellers in optimal path: {[filtered_df.iloc[i]['seller'] for i in set(min_path)]}")
+
+        # Build result dictionary
+        optimal_seller_groups = defaultdict(list)
+        for i in range(len(min_path)):
+            optimal_seller_groups[filtered_df.iloc[min_path[i]]['seller']].append(
+                sorted_desired_cards_set[i]
+            )
+
+        return optimal_seller_groups, min_cost
+
+    except Exception as e:
+        print_error(f"Error in find_cheapest_seller_group: {str(e)}")
+        print_error(traceback.format_exc())
+        return {}, float('inf')
 
 
-def filter_sellers_df(sellers_df, card_names):
+def filter_sellers_df(sellers_df: pd.DataFrame, card_names: list) -> pd.DataFrame:
+    """
+    Filter out redundant sellers, keeping only the cheapest per card combination.
 
-    # This function will filter out sellers that sell the same cards as other sellers, keeping only the cheapest offer per card per seller. If two sellers offer multiple cards at different prices, it will keep the cheapest package deal. 
+    For each unique combination of cards a seller offers, keeps only the cheapest
+    seller per country.
+    """
+    try:
+        output_df = pd.DataFrame(columns=sellers_df.columns)
 
-    # The input is a pandas dataframe with the following columns:
-    # - seller
-    # - country
-    # - card_names, one column per card, the value will be the price of that card from the seller. If the seller does not offer a card, the value will be None. Remember that by using this system, we can save a lot of data from scraping, and then re-use it when finding the cheapest price for different combinations of cards. 
-    # - link, the link to the listing.
+        # Extract all unique card combinations
+        combinations = []
+        for _, row in sellers_df.iterrows():
+            cards_sold = [card for card in card_names if pd.notna(row[card])]
+            cards_sold.sort()
+            if cards_sold not in combinations:
+                combinations.append(cards_sold)
 
-    # The output is a pandas dataframe with the same columns, but with the sellers that sell the same cards as other sellers filtered out.
+        # Filter sellers for each combination
+        for combination in combinations:
+            if not combination:
+                continue
 
-    
-    output_df = pd.DataFrame(columns=sellers_df.columns)
+            other_cards = [card for card in card_names if card not in combination]
+            cond_has_price = sellers_df[combination].notna().all(axis=1)
+            cond_null_others = sellers_df[other_cards].isna().all(axis=1)
+            mask = cond_has_price & cond_null_others
+            sellers_subset = sellers_df[mask].copy()
 
-    # First we extract all the combinations of cards that are being selled. 
-    combinations = []
+            if sellers_subset.empty:
+                continue
 
-    for _, row in sellers_df.iterrows():
-        cards_sold = [card for card in card_names if pd.notna(row[card])]
-        cards_sold.sort()
-        if cards_sold not in combinations:
-            combinations.append(cards_sold)
-    
-    # for each combination, we now filter out all sellers that offer the same cards at a higher price and within the same country.
-    for combination in combinations:
-        if not combination: # Added check for empty combination
-            continue
-        other_cards = [card for card in card_names if card not in combination]
-        cond_has_price_for_combination = sellers_df[combination].notna().all(axis=1)
-        cond_is_null_for_others = sellers_df[other_cards].isna().all(axis=1)
-        mask_exact_combination = cond_has_price_for_combination & cond_is_null_for_others
-        sellers_with_exact_combination_df = sellers_df[mask_exact_combination]
+            # Sort by total price for this combination
+            sellers_subset = sellers_subset.sort_values(by=combination, ascending=True)
 
-        # Sort the dataframe rows based on price
-        # This ensures we prioritize sellers with the lowest total price for the combination
-        sellers_with_exact_combination_df = sellers_with_exact_combination_df.sort_values(by=combination, ascending=True)
-
-        # Add only the cheapest seller for this combination to the output
-        if not sellers_with_exact_combination_df.empty:
+            # Keep cheapest per country
             temp_out_df = pd.DataFrame(columns=sellers_df.columns)
-            for _, row in sellers_with_exact_combination_df.iterrows():
-                # Check if we already have a seller from this country with the same combination
-                # If so, compare the total price and keep the cheaper one
+            for _, row in sellers_subset.iterrows():
                 country_mask = temp_out_df['country'] == row['country']
                 if country_mask.any():
-                    # Calculate total price for existing seller
                     existing_row = temp_out_df[country_mask].iloc[0]
-                    existing_total = sum(existing_row[card] for card in combination if pd.notna(existing_row[card]))
-                    
-                    # Calculate total price for current seller
-                    current_total = sum(row[card] for card in combination if pd.notna(row[card]))
-                    
-                    # If current seller is cheaper, replace the existing one
+                    existing_total = sum(existing_row[card] for card in combination
+                                        if pd.notna(existing_row[card]))
+                    current_total = sum(row[card] for card in combination
+                                       if pd.notna(row[card]))
+
                     if current_total < existing_total:
                         temp_out_df = temp_out_df[~country_mask]
+                        new_row_df = pd.DataFrame([row])
                         if temp_out_df.empty:
-                            temp_out_df = pd.DataFrame([row])
+                            temp_out_df = new_row_df
                         else:
-                            temp_out_df = pd.concat([temp_out_df, pd.DataFrame([row])], ignore_index=True)
-                    else:
-                        # Skip this row as we already have a cheaper seller from this country
-                        continue
+                            temp_out_df = pd.concat([temp_out_df, new_row_df], ignore_index=True)
                 else:
+                    new_row_df = pd.DataFrame([row])
                     if temp_out_df.empty:
-                        temp_out_df = pd.DataFrame([row])
+                        temp_out_df = new_row_df
                     else:
-                        temp_out_df = pd.concat([temp_out_df, pd.DataFrame([row])], ignore_index=True)
+                        temp_out_df = pd.concat([temp_out_df, new_row_df], ignore_index=True)
+
             if not temp_out_df.empty:
-                # Create a new DataFrame with the row and explicitly set dtypes to match sellers_df
-                new_row_df = pd.DataFrame([row])
-                # Ensure dtypes match by explicitly converting columns
-                for col in sellers_df.columns:
-                    if col in new_row_df.columns:
-                        new_row_df[col] = new_row_df[col].astype(sellers_df[col].dtype)
                 if output_df.empty:
-                    output_df = new_row_df
+                    output_df = temp_out_df
                 else:
-                    output_df = pd.concat([output_df, new_row_df], ignore_index=True)
-        else:
-            print(f"No sellers found for combination {combination}")
-    
-    print(f"Found {len(output_df)} unique sellers after filtering.")
-    return output_df
+                    output_df = pd.concat([output_df, temp_out_df], ignore_index=True)
 
-def create_sellers_dataframe(listings: pd.DataFrame, card_names: list[str]) -> tuple[pd.DataFrame, list[str]]:
-    # Creates a dataframe from the listings dataframe containing the following columns:
-    # - seller
-    # - country
-    # - card_names, one column per card, the value will be the price of that card from the seller. If the seller does not offer a card, the value will be None. Remember that by using this system, we can save a lot of data from scraping, and then re-use it when finding the cheapest price for different combinations of cards. 
+        print_info(f"Filtered to {len(output_df)} unique sellers.")
+        return output_df
 
-    found_cards = {}
-    for listing in listings.iterrows():
-        card_name = str(listing[1]['card_name']).lower()
-        if card_name not in card_names:
-            continue
-        found_cards[card_name] = True
-    
-    found_cards = list(found_cards.keys())
-    print(f"Found {len(found_cards)} cards in the listings.")
+    except Exception as e:
+        print_error(f"Error filtering sellers: {str(e)}")
+        return sellers_df
 
-    sellers_df = pd.DataFrame(columns=["seller", "country", "link", *found_cards])
-    
-    for listing in listings.iterrows():
-        seller = listing[1]['seller']
-        card_price = listing[1]['price']
-        card_name = str(listing[1]['card_name']).lower()
-        if card_name not in card_names:
-            # We don't add cards that we are not looking for. 
-            continue
-        
 
-        if seller in sellers_df['seller'].values:
-            sellers_df.loc[sellers_df['seller'] == seller, card_name] = card_price
-        else:
-            row = {
-                "seller": seller,
-                "country": listing[1]['country'],
-                **{card.lower(): None for card in found_cards}
-            }
-            row[card_name] = card_price
-            if sellers_df.empty:
-                sellers_df = pd.DataFrame([row])
+def create_sellers_dataframe(
+    listings: pd.DataFrame,
+    card_names: list[str]
+) -> tuple[pd.DataFrame, list[str]]:
+    """
+    Transform listings into a seller-focused DataFrame.
+
+    Creates DataFrame where each row is a seller, and columns are card prices.
+    """
+    try:
+        found_cards = {}
+        for _, listing in listings.iterrows():
+            card_name = str(listing['card_name']).lower()
+            if card_name in card_names:
+                found_cards[card_name] = True
+
+        found_cards = list(found_cards.keys())
+        print_info(f"Found {len(found_cards)} of {len(card_names)} desired cards in listings.")
+
+        sellers_df = pd.DataFrame(columns=["seller", "country", "link", *found_cards])
+
+        for _, listing in listings.iterrows():
+            seller = listing['seller']
+            card_price = listing['price']
+            card_name = str(listing['card_name']).lower()
+
+            if card_name not in card_names:
+                continue
+
+            if seller in sellers_df['seller'].values:
+                sellers_df.loc[sellers_df['seller'] == seller, card_name] = card_price
             else:
-                # Create a new DataFrame with the row and explicitly set dtypes to match sellers_df
+                row = {
+                    "seller": seller,
+                    "country": listing['country'],
+                    **{card.lower(): None for card in found_cards}
+                }
+                row[card_name] = card_price
                 new_row_df = pd.DataFrame([row])
-                # Ensure dtypes match by explicitly converting columns
-                for col in sellers_df.columns:
-                    if col in new_row_df.columns:
-                        new_row_df[col] = new_row_df[col].astype(sellers_df[col].dtype)
-                sellers_df = pd.concat([sellers_df, new_row_df], ignore_index=True)
-    
-    return sellers_df, found_cards
+                if sellers_df.empty:
+                    sellers_df = new_row_df
+                else:
+                    sellers_df = pd.concat([sellers_df, new_row_df], ignore_index=True)
+
+        return sellers_df, found_cards
+
+    except Exception as e:
+        print_error(f"Error creating sellers dataframe: {str(e)}")
+        return pd.DataFrame(), []
 
 
-def parse_raw_data(raw_data: list[dict], previous_listings: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-    # Parses the raw data from the CardApi and returns a dataframe with the following columns:
-    # - seller
-    # - card_name
-    # - price
-    # - country
-    # - link
-    # - Hash of the listing, so we can check if the listing is a duplicate before adding it to the dataframe.
-    # The input data will be a list of dictionaries, where each dictionary contains the following values:
-    # - seller
-    # - card_name
-    # - price
-    # - country
-    # - lin
-    listings = None
-    if not previous_listings.empty:
-        listings = previous_listings
-    else:
-        listings = pd.DataFrame(columns=["seller", "card_name", "price", "country", "link", "hash"])
-    
-    for listing in raw_data:
-        # Create a copy of the listing without the link for hashing
-        listing_for_hash = {k: v for k, v in listing.items() if k != 'link'}
-        # Convert the modified listing dictionary to a string for hashing
-        listing_str = json.dumps(listing_for_hash, sort_keys=True)
-        hash_value = hashlib.md5(listing_str.encode('utf-8')).hexdigest()
-        row = {
-            "seller": listing['seller'],
-            "card_name": listing['card_name'],
-            "price": listing['price'],
-            "country": listing['country'],
-            "link": listing['link'],
-            "hash": hash_value
-        }
-        if hash_value in listings['hash'].values:
-            continue
-        # Create a new row with matching dtypes before concatenation
-        new_row_df = pd.DataFrame([row])
-        if not listings.empty:
-            for col in listings.columns:
-                if col in new_row_df.columns:
-                    new_row_df[col] = new_row_df[col].astype(listings[col].dtype)
-        
-            listings = pd.concat([listings, new_row_df], ignore_index=True)
+def parse_raw_data(
+    raw_data: list[dict],
+    previous_listings: pd.DataFrame = None
+) -> pd.DataFrame:
+    """
+    Parse raw scraper data into a DataFrame with deduplication.
+
+    Uses MD5 hash of listing (excluding link) to detect duplicates.
+    """
+    try:
+        if previous_listings is not None and not previous_listings.empty:
+            listings = previous_listings.copy()
         else:
-            listings = new_row_df
-    print(f"listings count: {len(listings)}")
-    return listings
+            listings = pd.DataFrame(columns=["seller", "card_name", "price", "country", "link", "hash"])
 
+        new_count = 0
+        for listing in raw_data:
+            listing_for_hash = {k: v for k, v in listing.items() if k != 'link'}
+            listing_str = json.dumps(listing_for_hash, sort_keys=True)
+            hash_value = hashlib.md5(listing_str.encode('utf-8')).hexdigest()
+
+            if hash_value in listings['hash'].values:
+                continue
+
+            row = {
+                "seller": listing['seller'],
+                "card_name": listing['card_name'],
+                "price": listing['price'],
+                "country": listing['country'],
+                "link": listing['link'],
+                "hash": hash_value
+            }
+
+            new_row_df = pd.DataFrame([row])
+            if listings.empty:
+                listings = new_row_df
+            else:
+                listings = pd.concat([listings, new_row_df], ignore_index=True)
+            new_count += 1
+
+        print_info(f"Added {new_count} new listings. Total: {len(listings)}")
+        return listings
+
+    except Exception as e:
+        print_error(f"Error parsing raw data: {str(e)}")
+        return previous_listings if previous_listings is not None else pd.DataFrame()
+
+
+# =============================================================================
+# Menu System
+# =============================================================================
+
+class AppState:
+    """Application state container."""
+    def __init__(self):
+        self.desired_cards: list[str] = []
+        self.listings_df: pd.DataFrame = pd.DataFrame()
+        self.shipping_dict: dict = None
+        self.to_country: str = TO_COUNTRY
+
+
+def clear_screen():
+    """Clear the terminal screen."""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def display_main_menu(state: AppState):
+    """Display the main menu with current state information."""
+    clear_screen()
+    print(f"{Colors.BOLD}{Colors.CYAN}")
+    print("=" * 50)
+    print("       CardMarket Price Optimizer")
+    print("=" * 50)
+    print(f"{Colors.RESET}")
+
+    # Display current state
+    print(f"{Colors.BOLD}Current State:{Colors.RESET}")
+    if state.desired_cards:
+        print(f"  - Desired cards: {Colors.GREEN}Loaded{Colors.RESET} ({len(state.desired_cards)} cards)")
+    else:
+        print(f"  - Desired cards: {Colors.YELLOW}Not loaded{Colors.RESET}")
+
+    if not state.listings_df.empty:
+        print(f"  - Listings: {Colors.GREEN}Loaded{Colors.RESET} ({len(state.listings_df)} entries)")
+    else:
+        print(f"  - Listings: {Colors.YELLOW}Not loaded{Colors.RESET}")
+
+    print(f"  - Target country: {Colors.CYAN}{state.to_country}{Colors.RESET}")
+    print()
+
+    # Menu options
+    print(f"{Colors.BOLD}Options:{Colors.RESET}")
+    print("  1. Manage desired cards")
+    print("  2. Load/Manage listings")
+    print("  3. Gather new listings")
+    print("  4. Find cheapest sellers")
+    print("  5. Settings")
+    print("  0. Exit")
+    print()
+
+
+def menu_load_cards(state: AppState):
+    """Menu for managing desired cards."""
+    while True:
+        clear_screen()
+        print(f"{Colors.BOLD}Manage Desired Cards{Colors.RESET}")
+        print("-" * 30)
+
+        if state.desired_cards:
+            print(f"\nCurrently loaded: {Colors.GREEN}{len(state.desired_cards)} cards{Colors.RESET}")
+        else:
+            print(f"\nCurrently loaded: {Colors.YELLOW}None{Colors.RESET}")
+
+        available = get_available_card_lists()
+
+        print(f"\n{Colors.BOLD}Load:{Colors.RESET}")
+        for i, (name, path) in enumerate(available, 1):
+            try:
+                df = pd.read_csv(path)
+                count = len(df)
+            except:
+                count = "?"
+            print(f"  {i}. {name} ({count} cards)")
+
+        base = len(available)
+        print(f"  {base + 1}. Load from custom path")
+        print(f"  {base + 2}. Import from decklist (e.g. 1 Sol Ring (CMR) 472)")
+        print(f"  {base + 3}. Import from Moxfield URL")
+
+        print(f"\n{Colors.BOLD}Edit:{Colors.RESET}")
+        print(f"  {base + 4}. Edit cards")
+        print(f"  {base + 5}. Save list to file")
+
+        print("\n  0. Back to main menu")
+        print()
+
+        try:
+            choice = input("Select option: ").strip()
+
+            if choice == "0":
+                return
+
+            choice_num = int(choice)
+
+            if 1 <= choice_num <= base:
+                _, path = available[choice_num - 1]
+                cards = load_desired_cards(path)
+                if cards:
+                    state.desired_cards = cards
+            elif choice_num == base + 1:
+                custom_path = input("Enter path to CSV file: ").strip()
+                cards = load_desired_cards(custom_path)
+                if cards:
+                    state.desired_cards = cards
+            elif choice_num == base + 2:
+                _menu_import_decklist(state)
+            elif choice_num == base + 3:
+                _menu_import_moxfield(state)
+            elif choice_num == base + 4:
+                _menu_edit_cards(state)
+            elif choice_num == base + 5:
+                _menu_save_card_list(state)
+            else:
+                print_warning("Invalid option")
+                input("\nPress Enter to continue...")
+
+        except ValueError:
+            print_warning("Please enter a number")
+            input("\nPress Enter to continue...")
+
+
+def _menu_edit_cards(state: AppState):
+    """Open the interactive card editor."""
+    result = edit_card_list(state.desired_cards)
+    if result is not None:
+        state.desired_cards = result
+        print_success(f"Saved {len(result)} cards")
+    else:
+        print_info("Edit cancelled")
+    input("\nPress Enter to continue...")
+
+
+def _menu_save_card_list(state: AppState):
+    """Save the current card list to a CSV file."""
+    if not state.desired_cards:
+        print_warning("No cards to save")
+        input("\nPress Enter to continue...")
+        return
+
+    name = input("File name (without .csv): ").strip()
+    if not name:
+        print_warning("No name provided")
+        input("\nPress Enter to continue...")
+        return
+
+    filepath = os.path.join(DESIRED_CARDS_DIR, f"{name}.csv")
+    if os.path.exists(filepath):
+        if input(f"'{name}.csv' already exists. Overwrite? (y/n): ").strip().lower() != 'y':
+            input("\nPress Enter to continue...")
+            return
+
+    df = pd.DataFrame({"card_name": state.desired_cards})
+    df.to_csv(filepath, index=False)
+    print_success(f"Saved {len(state.desired_cards)} cards to {name}.csv")
+    input("\nPress Enter to continue...")
+
+
+def _menu_import_decklist(state: AppState):
+    """Import cards from a pasted decklist."""
+    print("\nPaste your decklist below (empty line to finish):")
+    lines = []
+    while True:
+        line = input()
+        if not line.strip():
+            break
+        lines.append(line)
+
+    if not lines:
+        print_warning("No input provided")
+        input("\nPress Enter to continue...")
+        return
+
+    text = "\n".join(lines)
+    cards = parse_decklist(text)
+
+    if cards:
+        state.desired_cards = cards
+        print_success(f"Imported {len(cards)} cards from decklist")
+    else:
+        print_warning("Could not parse any cards from the input")
+    input("\nPress Enter to continue...")
+
+
+def _menu_import_moxfield(state: AppState):
+    """Import cards from a Moxfield deck URL."""
+    url = input("Enter Moxfield deck URL: ").strip()
+    if not url:
+        print_warning("No URL provided")
+        input("\nPress Enter to continue...")
+        return
+
+    try:
+        print_info("Fetching deck from Moxfield...")
+        cards = import_from_moxfield(url)
+        state.desired_cards = cards
+        print_success(f"Imported {len(cards)} cards from Moxfield")
+    except CardImportError as e:
+        print_error(str(e))
+    except Exception as e:
+        print_error(f"Failed to import from Moxfield: {str(e)}")
+    input("\nPress Enter to continue...")
+
+
+def menu_manage_listings(state: AppState):
+    """Menu for managing listings."""
+    clear_screen()
+    print(f"{Colors.BOLD}Load/Manage Listings{Colors.RESET}")
+    print("-" * 30)
+
+    available = get_available_listings()
+
+    print("\nOptions:")
+    if available:
+        print("\nAvailable listings files:")
+        for i, (name, path) in enumerate(available, 1):
+            try:
+                df = pd.read_csv(path)
+                count = len(df)
+            except:
+                count = "?"
+            print(f"  {i}. {name} ({count} listings)")
+
+    base_option = len(available) + 1
+    print(f"\n  {base_option}. Enter custom path")
+    print(f"  {base_option + 1}. Export current listings")
+    print(f"  {base_option + 2}. Clear current listings")
+    print("  0. Back to main menu")
+    print()
+
+    try:
+        choice = input("Select option: ").strip()
+
+        if choice == "0":
+            return
+
+        choice_num = int(choice)
+
+        if 1 <= choice_num <= len(available):
+            _, path = available[choice_num - 1]
+            df = load_listings(path)
+            if df is not None:
+                state.listings_df = df
+        elif choice_num == base_option:
+            custom_path = input("Enter path to CSV file: ").strip()
+            df = load_listings(custom_path)
+            if df is not None:
+                state.listings_df = df
+        elif choice_num == base_option + 1:
+            if state.listings_df.empty:
+                print_warning("No listings to export")
+            else:
+                name = input("Export name (leave blank for date): ").strip() or None
+                save_listings(state.listings_df, name)
+        elif choice_num == base_option + 2:
+            if input("Are you sure? (y/n): ").strip().lower() == 'y':
+                state.listings_df = pd.DataFrame()
+                print_success("Listings cleared")
+        else:
+            print_warning("Invalid option")
+
+    except ValueError:
+        print_warning("Please enter a number")
+
+    input("\nPress Enter to continue...")
+
+
+def menu_gather_listings(state: AppState):
+    """Menu for gathering new listings via web scraping."""
+    clear_screen()
+    print(f"{Colors.BOLD}Gather New Listings{Colors.RESET}")
+    print("-" * 30)
+
+    if not state.desired_cards:
+        print_warning("Please load desired cards first!")
+        input("\nPress Enter to continue...")
+        return
+
+    print(f"\nWill gather listings for {len(state.desired_cards)} cards.")
+    if not state.listings_df.empty:
+        print(f"Current listings: {len(state.listings_df)} (new listings will be added)")
+
+    # Determine which cards still need scraping
+    if not state.listings_df.empty:
+        existing_cards = set(state.listings_df['card_name'].str.lower().unique())
+        cards_to_gather = [c for c in state.desired_cards
+                          if c.lower() not in existing_cards]
+        print(f"Cards needing data: {len(cards_to_gather)}")
+    else:
+        cards_to_gather = state.desired_cards
+
+    print("\nOptions:")
+    print("  1. Active mode (automatic scraping)")
+    print("  2. Passive mode (manual browsing)")
+    print("  3. Active mode headless (no browser window)")
+    print("  0. Cancel")
+    print()
+
+    choice = input("Select mode: ").strip()
+
+    if choice == "0":
+        return
+
+    headless = choice == "3"
+
+    try:
+        print_info("Initializing CardApi...")
+        api = CardApi(headless=headless)
+
+        if choice in ("1", "3"):
+            print_info("Starting active scraping mode...")
+            raw_data = api.gather_data(cards_to_gather)
+        elif choice == "2":
+            print_info("Starting passive mode. Browse CardMarket manually.")
+            print_info("The scraper will collect listings from pages you visit.")
+            raw_data = api.gather_data(cards_to_gather)
+        else:
+            print_warning("Invalid option")
+            api.close()
+            return
+
+        api.close()
+
+        # Parse and merge new data
+        state.listings_df = parse_raw_data(raw_data, state.listings_df)
+
+        # Offer to save
+        if input("\nSave listings now? (y/n): ").strip().lower() == 'y':
+            name = input("Export name (leave blank for date): ").strip() or None
+            save_listings(state.listings_df, name)
+
+    except Exception as e:
+        print_error(f"Error during scraping: {str(e)}")
+        print_error(traceback.format_exc())
+
+    input("\nPress Enter to continue...")
+
+
+def menu_find_cheapest(state: AppState):
+    """Menu for finding cheapest seller combinations."""
+    clear_screen()
+    print(f"{Colors.BOLD}Find Cheapest Sellers{Colors.RESET}")
+    print("-" * 30)
+
+    if not state.desired_cards:
+        print_warning("Please load desired cards first!")
+        input("\nPress Enter to continue...")
+        return
+
+    if state.listings_df.empty:
+        print_warning("Please load or gather listings first!")
+        input("\nPress Enter to continue...")
+        return
+
+    card_names = [card.lower() for card in state.desired_cards]
+
+    print_info(f"Processing {len(state.listings_df)} listings for {len(card_names)} cards...")
+
+    try:
+        # Create sellers dataframe
+        sellers_df, found_cards = create_sellers_dataframe(state.listings_df, card_names)
+
+        if sellers_df.empty:
+            print_error("No matching sellers found!")
+            input("\nPress Enter to continue...")
+            return
+
+        print_info(f"Found {len(sellers_df)} sellers with {len(found_cards)} cards.")
+
+        # Filter redundant sellers
+        filtered_df = filter_sellers_df(sellers_df, found_cards)
+
+        # Load or fetch shipping dictionary
+        if state.shipping_dict is None:
+            print_info(f"Fetching shipping prices for {state.to_country}...")
+            try:
+                state.shipping_dict = ShippingApi.get_shipping_prices(state.to_country)
+            except Exception as e:
+                print_error(f"Failed to fetch shipping prices: {str(e)}")
+                # Try to load from file
+                shipping_path = os.path.join(os.path.dirname(__file__), "shipping_dict.json")
+                if os.path.exists(shipping_path):
+                    print_info("Loading shipping data from cached file...")
+                    with open(shipping_path, 'r') as f:
+                        state.shipping_dict = json.load(f)
+                else:
+                    print_error("No shipping data available. Cannot proceed.")
+                    input("\nPress Enter to continue...")
+                    return
+
+        # Find optimal seller groups
+        print_info("Finding optimal seller combination...")
+        desired_cards_set = set(found_cards)
+        optimal_groups, min_cost = find_cheapest_seller_group(
+            filtered_df, state.shipping_dict, desired_cards_set
+        )
+
+        if not optimal_groups:
+            print_error("Could not find a valid seller combination!")
+            input("\nPress Enter to continue...")
+            return
+
+        # Display results
+        print(f"\n{Colors.BOLD}{Colors.GREEN}=== Results ==={Colors.RESET}")
+        total_card_cost = 0
+
+        for seller, cards in optimal_groups.items():
+            print(f"\n{Colors.BOLD}Seller: {seller}{Colors.RESET}")
+            for card in cards:
+                price = filtered_df.loc[filtered_df['seller'] == seller, card].values[0]
+                link_values = state.listings_df.loc[
+                    (state.listings_df['seller'] == seller) &
+                    (state.listings_df['card_name'].str.lower() == card.lower()),
+                    'link'
+                ].values
+                link = link_values[0] if len(link_values) > 0 else None
+                print(f"  - {card}: {price:.2f}€" + (f" ({link})" if link else ""))
+                total_card_cost += price
+
+        print(f"\n{Colors.BOLD}Total card cost: {total_card_cost:.2f}€{Colors.RESET}")
+        print(f"{Colors.BOLD}Total with shipping: {min_cost:.2f}€{Colors.RESET}")
+
+        # Offer to save results
+        if input("\nSave results to file? (y/n): ").strip().lower() == 'y':
+            output_path = input("Output file path (default: output.txt): ").strip() or "output.txt"
+            try:
+                with open(output_path, 'w') as f:
+                    f.write("CardMarket Price Optimizer Results\n")
+                    f.write("=" * 40 + "\n\n")
+                    for seller, cards in optimal_groups.items():
+                        f.write(f"Seller: {seller}\n")
+                        for card in cards:
+                            price = filtered_df.loc[filtered_df['seller'] == seller, card].values[0]
+                            f.write(f"  - {card}: {price:.2f}€\n")
+                        f.write("\n")
+                    f.write(f"Total card cost: {total_card_cost:.2f}€\n")
+                    f.write(f"Total with shipping: {min_cost:.2f}€\n")
+                print_success(f"Results saved to {output_path}")
+            except Exception as e:
+                print_error(f"Failed to save results: {str(e)}")
+
+    except Exception as e:
+        print_error(f"Error finding cheapest sellers: {str(e)}")
+        print_error(traceback.format_exc())
+
+    input("\nPress Enter to continue...")
+
+
+def menu_settings(state: AppState):
+    """Menu for application settings."""
+    clear_screen()
+    print(f"{Colors.BOLD}Settings{Colors.RESET}")
+    print("-" * 30)
+
+    print(f"\nCurrent settings:")
+    print(f"  1. Target country: {state.to_country}")
+    print(f"  2. Clear shipping cache")
+    print("  0. Back to main menu")
+    print()
+
+    choice = input("Select option: ").strip()
+
+    if choice == "1":
+        new_country = input(f"Enter target country (current: {state.to_country}): ").strip()
+        if new_country:
+            state.to_country = new_country.lower()
+            state.shipping_dict = None  # Clear cached shipping data
+            print_success(f"Target country set to: {state.to_country}")
+    elif choice == "2":
+        state.shipping_dict = None
+        print_success("Shipping cache cleared")
+
+    input("\nPress Enter to continue...")
+
+
+def run_interactive_menu():
+    """Run the interactive menu loop."""
+    state = AppState()
+
+    while True:
+        display_main_menu(state)
+        choice = input("Select option: ").strip()
+
+        if choice == "0":
+            print("\nGoodbye!")
+            break
+        elif choice == "1":
+            menu_load_cards(state)
+        elif choice == "2":
+            menu_manage_listings(state)
+        elif choice == "3":
+            menu_gather_listings(state)
+        elif choice == "4":
+            menu_find_cheapest(state)
+        elif choice == "5":
+            menu_settings(state)
+        else:
+            print_warning("Invalid option")
+            input("\nPress Enter to continue...")
+
+
+# =============================================================================
+# Main Entry Point
+# =============================================================================
 
 def main():
-    parser = argparse.ArgumentParser(description="Card Api and Analyzer")
+    parser = argparse.ArgumentParser(
+        description="CardMarket Price Optimizer - Find the cheapest seller combinations",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python main.py                                    # Interactive menu
+  python main.py --cards Resources/DesiredCards/default.csv --gather
+  python main.py --decklist my_deck.txt --gather    # Import from decklist file
+  python main.py --moxfield https://www.moxfield.com/decks/abc123 --gather
+  python main.py --listings Resources/Listings/listings_df_20260121.out.csv --find-cheapest
+        """
+    )
+    parser.add_argument(
+        "--cards",
+        type=str,
+        help="Path to CSV file containing desired card names"
+    )
+    parser.add_argument(
+        "--decklist",
+        type=str,
+        help="Path to a decklist file (standard MTG format: '1 Card Name (SET) 123')"
+    )
+    parser.add_argument(
+        "--moxfield",
+        type=str,
+        help="Moxfield deck URL to import cards from"
+    )
+    parser.add_argument(
+        "--listings",
+        type=str,
+        help="Path to CSV file containing listings data"
+    )
     parser.add_argument(
         "--gather",
         action="store_true",
-        help="Gather data for the cards and save the filtered results to ./listings_df.csv"
+        help="Gather new listings via web scraping (adds to existing)"
+    )
+    parser.add_argument(
+        "--headless",
+        action="store_true",
+        help="Run the browser in headless mode (no window)"
     )
     parser.add_argument(
         "--find-cheapest",
         action="store_true",
-        help="The cheapest n number of options to calculate seller groups for. Default is 0, and will skip that step. "
+        help="Find the cheapest seller combination"
     )
     parser.add_argument(
-        "--shipping-dict-path",
+        "--shipping-dict",
         type=str,
-        default=None,
-        required=False,
-        help="Path to CSV file to save data to and load data from. "
-    )
-    parser.add_argument("--listings-path",
-        type=str,
-        default=None,
-        required=False,
-        help="Path to CSV file to save data to and load unfiltered, raw data from. "
+        help="Path to shipping dictionary JSON file"
     )
     parser.add_argument(
-        "--output",    
-        type=str, 
-        default=None,
-        help="File to print analysis results to. "
+        "--export",
+        type=str,
+        help="Custom name for exported listings file"
     )
+    parser.add_argument(
+        "--output",
+        type=str,
+        help="File to write analysis results to"
+    )
+    parser.add_argument(
+        "--country",
+        type=str,
+        default=TO_COUNTRY,
+        help=f"Target country for shipping (default: {TO_COUNTRY})"
+    )
+
     args = parser.parse_args()
 
-    card_names = [card.lower() for card in DESIRED_CARDS]
-    card_names = list(set(card_names))
-    gather_card_names = card_names.copy()
-    
-    listings_df = pd.DataFrame()
-    raw_data = []
+    # If no action arguments provided, run interactive menu
+    has_action = args.gather or args.find_cheapest
+    has_input = args.cards or args.decklist or args.moxfield or args.listings
+    if not has_action and not has_input:
+        run_interactive_menu()
+        return
 
-    if args.listings_path and os.path.exists(args.listings_path):
-        print(f"--- Loading listings from: {args.listings_path} ---")
-        listings_df = pd.read_csv(args.listings_path)
-        # We also want to filter out card_names to only include the cards that are not in the listings_df
-        gather_card_names = [card for card in DESIRED_CARDS if card not in listings_df['card_name'].values]
+    # CLI mode
+    state = AppState()
+    state.to_country = args.country
 
-        
-    if args.gather:
-        # Gather more data
-        api = CardApi()
-        print("CardApi initialized.")
-        raw_data = api.gather_data(gather_card_names)
-        api.close()
-    
-        # Add new listings to the listings dataframe
-        listings_df = parse_raw_data(raw_data, previous_listings=listings_df)
-
-        # Save the listings dataframe to a csv file
-        if args.listings_path:
-            listings_df.to_csv(args.listings_path, index=False)
+    # Load cards from one of the available sources
+    if args.cards:
+        cards = load_desired_cards(args.cards)
+        if cards:
+            state.desired_cards = cards
         else:
-            listings_df.to_csv("listings_df.csv", index=False)
-    
-    
-    if args.find_cheapest:
-        # Create a sellers dataframe from the listings dataframe
-        print(f"Creating sellers dataframe over {len(card_names)} cards from {len(listings_df)} listings")
-
-        sellers_df, found_cards = create_sellers_dataframe(listings_df, card_names)
-
-        print(f"Found {len(sellers_df)} unique sellers, and {len(found_cards)} cards in the listings.")
-
-        # Since create_sellers_datafram will only add the cards we are looking for, we can filter out the cards that are not in the sellers_df.
-        
-        # Filter out sellers
-        filtered_df = filter_sellers_df(sellers_df, found_cards)
-
-        print(f"Filtered out to {len(filtered_df)} unique sellers.")
-        
-        # Load the shipping dictionary
-        shipping_dict = None
-        if args.shipping_dict_path:
-            print(f"--- Loading shipping dictionary from: {args.shipping_dict_path} ---")
-            if os.path.exists(args.shipping_dict_path):
-                with open(args.shipping_dict_path, 'r') as f:
-                    shipping_dict = json.load(f)
-        if not shipping_dict:
-            print(f"No shipping dictionary provided, scraping shipping prices for {TO_COUNTRY}")
-            shipping_dict = ShippingApi.get_shipping_prices(TO_COUNTRY)
-            
-            if args.shipping_dict_path: 
-                print(f"Saving shipping dictionary to {args.shipping_dict_path}")
-                with open(args.shipping_dict_path, 'w') as f:
-                    json.dump(shipping_dict, f)
+            print_error("Failed to load cards. Exiting.")
+            sys.exit(1)
+    elif args.decklist:
+        try:
+            with open(args.decklist, 'r') as f:
+                text = f.read()
+            cards = parse_decklist(text)
+            if cards:
+                state.desired_cards = cards
+                print_success(f"Imported {len(cards)} cards from decklist")
             else:
-                print(f"No shipping dictionary provided, saving to shipping_dict.json")
-                with open("shipping_dict.json", 'w') as f:
-                    json.dump(shipping_dict, f)
-    
-        
-        # Find optimal seller groups based on cost
-        desired_cards_as_set = set(found_cards)
-        print(f"Finding optimal seller groups for {len(desired_cards_as_set)} cards")
-        optimal_seller_groups, min_cost = find_cheapest_seller_group(filtered_df, shipping_dict, desired_cards_as_set)
+                print_error("No cards found in decklist file.")
+                sys.exit(1)
+        except FileNotFoundError:
+            print_error(f"Decklist file not found: {args.decklist}")
+            sys.exit(1)
+    elif args.moxfield:
+        try:
+            cards = import_from_moxfield(args.moxfield)
+            state.desired_cards = cards
+            print_success(f"Imported {len(cards)} cards from Moxfield")
+        except CardImportError as e:
+            print_error(str(e))
+            sys.exit(1)
 
-        # Print results, prints where each card should be bought from
-        print(f"--- Results ---")
-        total_cost = 0
-        
-        output_file = None
-        if args.output:
-            output_file = open(args.output, "w")
-        
-        for seller, cards in optimal_seller_groups.items():
-            for card in cards:
-                # Use proper condition syntax with parentheses and check if link exists
-                link_values = listings_df.loc[(listings_df['seller'] == seller) & (listings_df['card_name'] == card), 'link'].values
-                link = link_values[0] if len(link_values) > 0 else None
+    # Load listings if provided
+    if args.listings:
+        df = load_listings(args.listings)
+        if df is not None:
+            state.listings_df = df
 
-                output_string = f"  - For {card}, the cheapest option is to buy from {seller} at {filtered_df.loc[filtered_df['seller'] == seller, card].values[0]}{f" (link: {link})" if link else ""}"
-                print(output_string)
-                if output_file:
-                    output_file.write(output_string + "\n")
-            total_cost += filtered_df.loc[filtered_df['seller'] == seller, cards].sum().sum()
-        print(f"Total cost: {min_cost}, where {total_cost} is the sum of the prices of the cards.")
-        if output_file:
-            output_file.write(f"Total cost: {min_cost}\n")
-            output_file.close()
-    else:
-        print("Find cheapest is zero, skipping data analysis part. ")
-    
-    
-    
+    # Load shipping dictionary if provided
+    if args.shipping_dict:
+        try:
+            with open(args.shipping_dict, 'r') as f:
+                state.shipping_dict = json.load(f)
+            print_success(f"Loaded shipping data from {args.shipping_dict}")
+        except Exception as e:
+            print_warning(f"Failed to load shipping dictionary: {str(e)}")
+
+    # Gather new listings
+    if args.gather:
+        if not state.desired_cards:
+            print_error("Cannot gather listings without card list. Use --cards option.")
+            sys.exit(1)
+
+        try:
+            # Determine cards to gather
+            if not state.listings_df.empty:
+                existing_cards = set(state.listings_df['card_name'].str.lower().unique())
+                cards_to_gather = [c for c in state.desired_cards
+                                  if c.lower() not in existing_cards]
+            else:
+                cards_to_gather = state.desired_cards
+
+            print_info(f"Gathering listings for {len(cards_to_gather)} cards...")
+            api = CardApi(headless=args.headless)
+            raw_data = api.gather_data(cards_to_gather)
+            api.close()
+
+            state.listings_df = parse_raw_data(raw_data, state.listings_df)
+
+            # Save listings
+            export_name = args.export
+            save_listings(state.listings_df, export_name)
+
+        except Exception as e:
+            print_error(f"Error during gathering: {str(e)}")
+            sys.exit(1)
+
+    # Find cheapest sellers
+    if args.find_cheapest:
+        if not state.desired_cards:
+            print_error("Cannot find cheapest without card list. Use --cards option.")
+            sys.exit(1)
+
+        if state.listings_df.empty:
+            print_error("Cannot find cheapest without listings. Use --listings or --gather option.")
+            sys.exit(1)
+
+        try:
+            card_names = [card.lower() for card in state.desired_cards]
+
+            # Create and filter sellers dataframe
+            sellers_df, found_cards = create_sellers_dataframe(state.listings_df, card_names)
+            filtered_df = filter_sellers_df(sellers_df, found_cards)
+
+            # Load or fetch shipping dictionary
+            if state.shipping_dict is None:
+                print_info(f"Fetching shipping prices for {state.to_country}...")
+                state.shipping_dict = ShippingApi.get_shipping_prices(state.to_country)
+
+                # Cache shipping dictionary
+                shipping_cache_path = os.path.join(os.path.dirname(__file__), "shipping_dict.json")
+                with open(shipping_cache_path, 'w') as f:
+                    json.dump(state.shipping_dict, f)
+
+            # Find optimal groups
+            desired_cards_set = set(found_cards)
+            optimal_groups, min_cost = find_cheapest_seller_group(
+                filtered_df, state.shipping_dict, desired_cards_set
+            )
+
+            # Output results
+            output_file = None
+            if args.output:
+                output_file = open(args.output, 'w')
+
+            total_card_cost = 0
+            print(f"\n{Colors.BOLD}=== Results ==={Colors.RESET}")
+
+            for seller, cards in optimal_groups.items():
+                for card in cards:
+                    price = filtered_df.loc[filtered_df['seller'] == seller, card].values[0]
+                    link_values = state.listings_df.loc[
+                        (state.listings_df['seller'] == seller) &
+                        (state.listings_df['card_name'].str.lower() == card.lower()),
+                        'link'
+                    ].values
+                    link = link_values[0] if len(link_values) > 0 else None
+
+                    output_string = f"  - {card}: buy from {seller} at {price:.2f}€" + \
+                                   (f" (link: {link})" if link else "")
+                    print(output_string)
+                    if output_file:
+                        output_file.write(output_string + "\n")
+                    total_card_cost += price
+
+            summary = f"\nTotal card cost: {total_card_cost:.2f}€\nTotal with shipping: {min_cost:.2f}€"
+            print(summary)
+            if output_file:
+                output_file.write(summary + "\n")
+                output_file.close()
+                print_success(f"Results written to {args.output}")
+
+        except Exception as e:
+            print_error(f"Error finding cheapest sellers: {str(e)}")
+            print_error(traceback.format_exc())
+            sys.exit(1)
+
+
 if __name__ == "__main__":
     main()

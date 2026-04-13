@@ -1,10 +1,12 @@
 from enum import Enum
 import json
+import math
 import time
 import random
 import re
 import requests
 from playwright.sync_api import sync_playwright, Page, expect
+from playwright_stealth import Stealth
 import readchar
 import threading
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
@@ -49,6 +51,78 @@ class Countries(Enum):
    CROATIA = 35
    JAPAN = 36
    ICELAND = 37
+
+
+class CaptchaError(Exception):
+    """Raised when a Cloudflare captcha is detected and cannot be solved."""
+    pass
+
+
+# Stealth configuration
+STEALTH = Stealth(
+    navigator_webdriver=True,
+    navigator_plugins=True,
+    navigator_permissions=True,
+    navigator_languages=True,
+    navigator_platform=True,
+    navigator_vendor=True,
+    navigator_user_agent=True,
+    navigator_hardware_concurrency=True,
+    webgl_vendor=True,
+    media_codecs=True,
+    hairline=True,
+    iframe_content_window=True,
+    navigator_languages_override=("en-US", "en"),
+)
+
+
+def human_delay(min_s: float = 0.8, max_s: float = 2.5, stop_event: threading.Event = None):
+    """Sleep for a randomized duration that feels human.
+
+    If stop_event is provided, checks it in short intervals so the caller
+    can break out quickly when the user presses a key.
+    """
+    duration = random.uniform(min_s, max_s)
+    if stop_event is None:
+        time.sleep(duration)
+        return
+    end = time.monotonic() + duration
+    while time.monotonic() < end:
+        if stop_event.is_set():
+            return
+        time.sleep(min(0.1, end - time.monotonic()))
+
+
+def human_mouse_move(page: Page, target_x: int, target_y: int, steps_range: tuple = (15, 30)):
+    """Move the mouse to (target_x, target_y) along a curved, jittery path."""
+    box = page.viewport_size
+    if not box:
+        return
+    # Start from a random-ish current position
+    cur_x = random.randint(0, box["width"])
+    cur_y = random.randint(0, box["height"])
+    steps = random.randint(*steps_range)
+
+    for i in range(1, steps + 1):
+        t = i / steps
+        # Ease-in-out curve
+        t_ease = t * t * (3 - 2 * t)
+        mid_x = cur_x + (target_x - cur_x) * t_ease + random.gauss(0, 2)
+        mid_y = cur_y + (target_y - cur_y) * t_ease + random.gauss(0, 2)
+        page.mouse.move(mid_x, mid_y)
+        time.sleep(random.uniform(0.005, 0.02))
+
+
+def human_scroll(page: Page, direction: str = "down"):
+    """Scroll the page like a human — variable distance with pauses."""
+    distance = random.randint(200, 600)
+    if direction == "up":
+        distance = -distance
+    steps = random.randint(3, 6)
+    per_step = distance / steps
+    for _ in range(steps):
+        page.mouse.wheel(0, per_step + random.gauss(0, 10))
+        time.sleep(random.uniform(0.05, 0.15))
 
 
 # Stop event handler for active mode
@@ -174,19 +248,24 @@ class ShippingApi:
 
 
 class CardApi:
-    def __init__(self, language: str = "English"):
+    def __init__(self, language: str = "English", headless: bool = False):
         """Initialize the API with Playwright."""
         print("Initializing CardMarket API with Playwright...")
         self.base_url = "https://www.cardmarket.com/en/Magic"
         self.listings_data = {}
         self.language = language.lower()
+        self.headless = headless
         self._start_playwright()
 
     def _start_playwright(self):
-        """Initialize Playwright and the browser."""
+        """Initialize Playwright and the browser with stealth evasions."""
         self.playwright = sync_playwright().start()
-        self.browser = self.playwright.firefox.launch(headless=False)
-        self.context = self.browser.new_context()
+        self.browser = self.playwright.firefox.launch(headless=self.headless)
+        self.context = self.browser.new_context(
+            viewport={"width": random.randint(1200, 1400), "height": random.randint(800, 950)},
+            locale="en-US",
+        )
+        STEALTH.apply_stealth_sync(self.context)
         self.page = self.context.new_page()
         
         # Set up URL modification
@@ -194,6 +273,60 @@ class CardApi:
         
         # Navigate to the base URL
         self.page.goto(self.base_url)
+        self._wait_for_captcha()
+
+    def _is_captcha_page(self) -> bool:
+        """Check if the current page is a Cloudflare challenge/captcha."""
+        title = self.page.title()
+        if "just a moment" in title.lower():
+            return True
+        turnstile = self.page.query_selector("input[name='cf-turnstile-response']")
+        if turnstile:
+            return True
+        challenge = self.page.query_selector("#challenge-form, #cf-challenge-running")
+        if challenge:
+            return True
+        return False
+
+    def _wait_for_captcha(self, timeout_s: int = 300) -> bool:
+        """If a captcha is detected, wait for it to be resolved.
+
+        In non-headless mode: pauses and polls until the user solves it.
+        In headless mode: logs an error and raises an exception since
+        there is no browser window for the user to interact with.
+
+        Returns True if captcha was detected (and resolved), False if no captcha.
+        """
+        if not self._is_captcha_page():
+            return False
+
+        if self.headless:
+            print("[CAPTCHA] Cloudflare challenge detected in headless mode.")
+            print("[CAPTCHA] Cannot solve automatically. Stopping.")
+            raise CaptchaError(
+                "Cloudflare captcha detected in headless mode. "
+                "Re-run without --headless to solve it manually."
+            )
+
+        print("[CAPTCHA] Cloudflare challenge detected!")
+        print("[CAPTCHA] Please solve it in the browser window...")
+
+        deadline = time.monotonic() + timeout_s
+        while time.monotonic() < deadline:
+            time.sleep(1)
+            if not self._is_captcha_page():
+                print("[CAPTCHA] Solved! Continuing...")
+                human_delay(1.0, 2.0)
+                return True
+
+        print(f"[CAPTCHA] Timed out after {timeout_s}s waiting for captcha to be solved.")
+        raise CaptchaError(f"Captcha not solved within {timeout_s} seconds.")
+
+    def _navigate(self, url: str, **kwargs):
+        """Navigate to a URL and check for captcha afterwards."""
+        kwargs.setdefault("timeout", 60000)
+        self.page.goto(url, **kwargs)
+        self._wait_for_captcha()
 
     def _setup_url_modifier(self):
         """Set up the route handler to modify URLs based on patterns."""
@@ -278,16 +411,22 @@ class CardApi:
         Collects all listings that are currently on the page.
         """
         current_url = self.page.url
-        
-        # First we make sure we are on a listings page. 
+
+        # First we make sure we are on a listings page.
         if '/Products/Singles/' not in current_url and '/Offers/Singles/' not in current_url:
             return None
-        
+
         try:
             # Wait for listings to load
             article_rows_selector = "div[id^='articleRow']"
             self.page.wait_for_selector(article_rows_selector, timeout=3000)
-            
+
+            # Simulate reading the page — scroll down through listings
+            human_delay(0.5, 1.2)
+            for _ in range(random.randint(1, 3)):
+                human_scroll(self.page, "down")
+                human_delay(0.3, 0.8)
+
             # Find and process all listing rows
             article_elements = self.page.query_selector_all(article_rows_selector)
             article_count = len(article_elements)
@@ -403,57 +542,94 @@ class CardApi:
 
     def _search_card(self, card_name: str):
         """
-        Searches for a card and returns a list of listings. 
+        Searches for a card and returns a list of listings.
         """
-        # base url for searching cards
-        base_url = "https://www.cardmarket.com/en/Magic/Products/Search?searchString="
+        # base url for searching cards (mode=list preserves the list view with productRow divs)
+        base_url = "https://www.cardmarket.com/en/Magic/Products/Search?mode=list&searchString="
 
         # Search for the card
         search_url = f"{base_url}{self._parse_card_name_search(card_name)}"
-        self.page.goto(search_url)
-        
-        # This will either redirect us to a product page, or present a list of results. 
-        # We first check if we are redirected to a product page. 
+        self._navigate(search_url)
+        human_delay(1.0, 2.5)
+
+        # This will either redirect us to a product page, or present a list of results.
+        # We first check if we are redirected to a product page.
         current_url = self.page.url
         if current_url != search_url and "/Products/Singles/" in current_url:
-            self.page.goto(self._modify_url(current_url))
+            self._navigate(self._modify_url(current_url))
+            human_delay(0.8, 1.5)
             return self._collect_listings()
-        
-        # If we are not redirected, we need to check if there are any results. 
+
+        # If we are not redirected, we need to check if there are any results.
         no_results = self.page.get_by_text("Sorry, no matches for your query")
         if no_results.count() > 0:
             print(f"No results found for {card_name}")
             return []
 
-        # Now we need to get the links of the products. 
+        # Try list-view product rows first, fall back to grid-view links
+        product_links = self._find_product_links(card_name)
+        if not product_links:
+            print(f"Could not find products with the name {card_name}")
+            return []
+
+        # Navigate to the first matching product
+        for link_element in product_links:
+            box = link_element.bounding_box()
+            if box:
+                human_mouse_move(
+                    self.page,
+                    int(box["x"] + box["width"] / 2),
+                    int(box["y"] + box["height"] / 2),
+                )
+                human_delay(0.2, 0.5)
+
+            link_element.click()
+            self.page.wait_for_load_state("networkidle")
+            self._wait_for_captcha()
+            human_delay(0.8, 1.8)
+            return self._collect_listings()
+
+        print(f"Could not find products with the name {card_name}")
+        return []
+
+    def _find_product_links(self, card_name: str) -> list:
+        """Find product links on a search results page.
+
+        Tries list-view (productRow divs) first, then falls back to
+        the grid-view (direct product links with images).
+        """
+        # List view: div[id^='productRow']
         product_selector = "div[id^='productRow']"
         try:
             self.page.wait_for_selector(product_selector, timeout=3000)
+            product_elements = self.page.query_selector_all(product_selector)
+            matches = []
+            for product_element in product_elements:
+                link_element = product_element.query_selector("a[href*='/Products/']")
+                if not link_element:
+                    continue
+                name_text = link_element.text_content().strip()
+                if card_name.lower() in name_text.lower():
+                    matches.append(link_element)
+            if matches:
+                return matches
         except Exception:
-            print(f"Timeout waiting for product elements for {card_name}")
-            return []
-        
-        product_elements = self.page.query_selector_all(product_selector)
-        
-        for product_element in product_elements:
-            link_element = product_element.query_selector("a[href*='/Products/']")
-            if not link_element:
-                continue
-                
-            name_text = link_element.text_content().strip()
-            if card_name.lower() in name_text.lower():
-                # Click the product link
-                link_element.click()
-                
-                # Wait for navigation to complete
-                self.page.wait_for_load_state("networkidle")
-                
-                # The URL modifier will automatically add the necessary parameters
-                return self._collect_listings()
-        
-        # If we don't find any results, we return an empty list. 
-        print(f"Could not find products with the name {card_name}")
-        return []
+            pass
+
+        # Grid view fallback: links with product images
+        grid_links = self.page.query_selector_all("a[href*='/Products/Singles/']")
+        matches = []
+        for link in grid_links:
+            img = link.query_selector("img[alt]")
+            if img:
+                alt = img.get_attribute("alt") or ""
+                if card_name.lower() in alt.lower():
+                    matches.append(link)
+                    continue
+            link_text = link.text_content().strip()
+            if card_name.lower() in link_text.lower():
+                matches.append(link)
+        return matches
 
     def gather_data(self, card_names: list[str], max_automatic_errors: int = 7):
         """
@@ -462,8 +638,8 @@ class CardApi:
         - Passive mode, where it will only collect listings from the current page.
         """
         active_mode = False
-        stop_event = threading.Event()
-        stop_event.set()
+        self._stop_event = threading.Event()
+        self._stop_event.set()
 
         cards_to_scrape = card_names
         while True:
@@ -477,12 +653,11 @@ class CardApi:
             if action == 's':
                 return self._format_listings(card_names)
             elif action == 'a':
-                # update the card names to scrape
                 cards_to_scrape = self._get_unscraped_cards(card_names)
-                stop_event.clear()
+                self._stop_event.clear()
                 active_mode = True
             elif action == 'p':
-                stop_event.clear()
+                self._stop_event.clear()
                 active_mode = False
             elif action == 'r':
                 self.close()
@@ -492,20 +667,25 @@ class CardApi:
             else:
                 print("Invalid option, please try again")
                 continue
-                
-            input_thread = threading.Thread(target=input_reader_thread_with_readchar, args=(stop_event,))
+
+            input_thread = threading.Thread(
+                target=input_reader_thread_with_readchar,
+                args=(self._stop_event,),
+                daemon=True,
+            )
             input_thread.start()
             print(f"{'Automatic mode' if active_mode else 'Passive mode'}, press any key to return to the menu")
 
             previous_content = self.page.content()
-            
             automatic_error_count = 0
-            
-            while not stop_event.is_set():
+
+            while not self._stop_event.is_set():
                 if active_mode:
                     zero_listings_count = 0
                     for card_name in cards_to_scrape:
-                        try: 
+                        if self._stop_event.is_set():
+                            break
+                        try:
                             listings = self._search_card(card_name)
                             if listings:
                                 self.listings_data.update(listings)
@@ -514,13 +694,20 @@ class CardApi:
                                 zero_listings_count += 1
                                 print(f"No listings found for {card_name}")
                                 if zero_listings_count > 1:
-                                    print(f"Detecting captcha, restarting browser")
+                                    print(f"Multiple cards with no listings, restarting browser")
                                     self.close()
                                     self._start_playwright()
                                     cards_to_scrape = self._get_unscraped_cards(card_names)
                                     break
-                            if stop_event.is_set():
-                                break
+                        except CaptchaError:
+                            # In headless mode this is fatal — save what we have
+                            if self.headless:
+                                print("[CAPTCHA] Returning collected data.")
+                                return self._format_listings(card_names)
+                            # In non-headless mode _wait_for_captcha already
+                            # paused for the user to solve it, so just retry
+                            cards_to_scrape = self._get_unscraped_cards(card_names)
+                            break
                         except Exception as e:
                             print(f"Error gathering data, trying restarting browser")
                             self.close()
@@ -531,23 +718,24 @@ class CardApi:
                                 return self._format_listings(card_names)
                             automatic_error_count += 1
                             break
-                        
-                        time.sleep(random.uniform(0.5, 1.5))
+
+                        human_delay(2.0, 5.0, self._stop_event)
                     print("--------------------------------")
                     cards_to_scrape = self._get_unscraped_cards(card_names)
                     if len(cards_to_scrape) == 0:
                         print("No more cards to scrape, returning to menu")
                         break
-                   
+
                 else:
+                    if self._stop_event.wait(0.5):
+                        break
                     try:
                         current_content = self.page.content()
-                        if previous_content != current_content: 
+                        if previous_content != current_content:
                             self._collect_listings()
                         previous_content = current_content
                     except Exception as e:
                         print(f"Error gathering data: {e}")
-                    time.sleep(0.5)
     
     def _format_listings(self, card_names):
         """Formats the listings data into a list of dictionaries."""

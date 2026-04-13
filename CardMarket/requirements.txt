@@ -5,5 +5,6 @@ tqdm>=4.65.0
 
 # API dependencies for web scraping and HTTP requests
 playwright>=1.40.0
+playwright-stealth>=2.0.0
 requests>=2.31.0
-readchar>=4.0.0 
+readchar>=4.0.0

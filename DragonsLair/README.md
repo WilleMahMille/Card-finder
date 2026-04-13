@@ -2,24 +2,40 @@
 
 ## Description
 
-This includes an automatic scraper that will find all cards that are currently tradable in the DragonsLair shops, and match them with cards that you own, to tell you how much you can trade in your cards for (note that you trade in for other cards of that value). Useful if you want to trade some of your cards for other cards if you have, for example, a lot of duplicates.
+An automatic scraper that finds all cards currently tradable in DragonsLair shops (list.dragonslair.se) and matches them with cards you own, telling you how much you can trade in your cards for. Useful if you want to trade duplicates or unused cards for store credit toward other singles.
 
 ## How it works
 
-The scraper part will iterate through all cards in the DragonsLair single card website to gather all relevant card information for each card, and place this in a dataframe. Once the data has been gathered (takes about 1 hour and around 1000-5000 requests), it will match cards that you specify with these tradable cards to get the total value of cards you can trade in for. The owned cards support using exported cards from manabox, or any other .csv file that has the required properties (more on that in the Usage section). It currently only supports matching cards based on foil, set name and card name.
+The scraper iterates through all card sets on the DragonsLair singles listing page to gather card names, prices, and buy-in information. Once the data is collected, it matches cards you specify against the tradable cards to calculate the total trade-in value. Owned cards can be exported from Manabox or any CSV with the required columns. Matching is currently based on card name, set name, and foil status.
 
 ## Usage
 
-To run the script, simply use
+### Manual run
 
 ```
 python main.py --owned-cards ./owned-cards.csv --output ./output.txt
 ```
 
-Where `owned_cards.csv` is a `.csv` file that has `Name`, `Set Name`, `Foil`, and `Quantity`, and `output.txt` will be an output file containing the result. This commadn will gather tradable cards and save them to `./tradable_cards.csv`, so if you don't want to re-gather cards everything, use
+Where `owned-cards.csv` is a CSV file with `Name`, `Set Name`, `Foil`, and `Quantity` columns. This will scrape all tradable cards and save them to `./tradable_cards.csv`.
+
+To skip re-scraping and reuse previously gathered data:
 
 ```
 python main.py --owned-cards ./owned-cards.csv --tradable-cards ./tradable_cards.csv --output ./output.txt
 ```
 
-The program will then skip the gathering phase and instead use the cards found in `./tradable_cards.csv`.
+### Automated scanning (scan runner)
+
+`scan_runner.py` is an incremental scanner designed for scheduled/CI use. It runs with a request budget per invocation (default 250), saves progress, and resumes where it left off on the next run. New sets are detected and prioritized automatically.
+
+Configuration is via environment variables:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `REQUEST_BUDGET` | 250 | Max HTTP requests per run |
+| `MIN_SLEEP` / `MAX_SLEEP` | 2 / 8 | Random delay range between requests (seconds) |
+| `COOLDOWN_DAYS` | 60 | Days to wait after a full scan before starting a new cycle |
+| `FORCE_RUN` | 0 | Set to 1 to bypass cooldown |
+| `SCAN_MODE` | resume | `resume`, `new-sets-only`, or `full-rescan` |
+
+A GitHub Actions workflow (`.github/workflows/scan-dragonslair.yml`) runs the scanner 4 times per day on a cron schedule and commits results to a separate `data` branch. It can also be triggered manually via workflow dispatch.

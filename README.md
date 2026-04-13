@@ -2,46 +2,30 @@
 
 ## GitHub Repository
 
-🔗 **Repository**: [https://github.com/WilleMahMille/card-finder](https://github.com/WilleMahMille/card-finder)
+[https://github.com/WilleMahMille/card-finder](https://github.com/WilleMahMille/card-finder)
 
-This is a repository I sometimes use for managing Magic the Gathering cards. 
-It includes a webscraper, prize optimizer (using dynamic programming),
-and a card matcher. Includes some tools to be used with CardMarket and some 
-tools to be used for Dragonslair (Swedish board game store);
+A collection of tools for managing Magic: The Gathering cards. Includes a web scraper, price optimizer (using dynamic programming), and a card trade-in matcher. Built for use with CardMarket and DragonsLair (Swedish board game store).
 
-## How to use
+## Installation
 
-### Installation
-
-This is built for python version 3.12.9, and might not work with other versions. Each subfolder includes a requirements.txt file that you can install using
+Built for Python 3.12.9 and may not work with other versions. Each subfolder has its own `requirements.txt`:
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
-For browser-functionality (currently in the CardMarket "api"), Playwrights dependencies also need to be installed, which can be done using
+For browser functionality (used by the CardMarket scraper), Playwright's browser binaries also need to be installed:
 
 ```
 playwright install
 ```
 
-## Description of subfolders
+## Subfolders
 
 ### CardMarket
 
-This includes a webscraper for automatically gathering listings from the 
-CardMarket website. Worth noting that since CardMarket uses Cloudflare's 
-anti-botting system, I wouldn't recommend using this too often or for too 
-many cards (around 100 max), since it will be more and more strict with 
-blocking access to the site if it notices bot-like behaviour. Otherwise, 
-this scraper will scrape both shipping prices to a desired country, try to 
-automatically gather filtered listings, and then use a dynamic programming 
-approach to calculate the cheapest way of buying the desired cards on CardMarket.
+Web scraper and price optimizer for [cardmarket.com](https://www.cardmarket.com). Gathers filtered listings for a set of desired cards (loaded from CSV files, Moxfield URLs, or decklists), then uses dynamic programming to find the cheapest combination of sellers accounting for shipping costs. Includes stealth measures against Cloudflare bot detection, automatic captcha handling, and a headless mode for automated use.
 
 ### DragonsLair
 
-This includes an automatic requestscraper that will find all cards that are 
-currently tradable in the DragonsLair shops, and match them with cards that 
-you own, to tell you how much you can trade in your cards for (note that you 
-trade in for other cards of that value). Useful if you want to trade some of 
-your cards for other cards if you have, for example, a lot of duplicates.
+Scraper for [list.dragonslair.se](https://list.dragonslair.se) that finds all cards currently available for trade-in, and matches them against cards you own to calculate your total trade-in value. Includes an incremental scan runner for scheduled use via GitHub Actions, which runs on a cron schedule and stores results on a separate data branch.

@@ -1,0 +1,99 @@
+name: Scan Dragons Lair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Scan mode"
+        type: choice
+        options:
+          - resume
+          - new-sets-only
+          - full-rescan
+        default: resume
+      request_budget:
+        description: "Max requests for this run"
+        default: "250"
+        type: string
+      skip_delay:
+        description: "Skip random start delay"
+        default: false
+        type: boolean
+  schedule:
+    # 4x/day spread across the day, each with random 0-30 min delay on top
+    - cron: "17 2 * * *"
+    - cron: "43 8 * * *"
+    - cron: "11 14 * * *"
+    - cron: "37 20 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Checkout data branch
+        run: |
+          git fetch origin data || true
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            git checkout origin/data -- data/ || true
+          fi
+          # Copy data into DragonsLair/data for the script
+          mkdir -p DragonsLair/data
+          cp data/* DragonsLair/data/ 2>/dev/null || true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r DragonsLair/requirements.txt
+
+      - name: Run scan
+        working-directory: DragonsLair
+        env:
+          REQUEST_BUDGET: ${{ inputs.request_budget || '250' }}
+          RANDOM_START_DELAY: ${{ inputs.skip_delay == true && '0' || '1' }}
+          MIN_SLEEP: "2"
+          MAX_SLEEP: "8"
+          FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+          SCAN_MODE: ${{ inputs.mode || 'resume' }}
+        run: python scan_runner.py
+
+      - name: Commit results to data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stash the data files
+          cp -r DragonsLair/data /tmp/scan-data
+
+          # Create or switch to data branch
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            git checkout data
+            git pull origin data
+          else
+            git checkout --orphan data
+            git rm -rf . || true
+          fi
+
+          # Copy data files back
+          mkdir -p data
+          cp /tmp/scan-data/* data/ 2>/dev/null || true
+
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            CARDS=$(wc -l < data/tradable_cards.csv 2>/dev/null || echo 0)
+            CARDS=$((CARDS - 1))
+            git commit -m "scan: $(date -u +%Y-%m-%d) — ${CARDS} cards"
+            git push origin data
+          fi

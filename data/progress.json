@@ -1,0 +1,3515 @@
+{
+  "scanned_sets": {
+    "magic-secret-lair-drop": {
+      "last_scanned": "2026-04-14T05:36:06.506967+00:00",
+      "cards_found": 91
+    },
+    "magic-wilds-of-eldraine-commander": {
+      "last_scanned": "2026-04-14T05:36:53.688388+00:00",
+      "cards_found": 118
+    },
+    "magic-conspiracy": {
+      "last_scanned": "2026-04-14T05:37:36.560847+00:00",
+      "cards_found": 106
+    },
+    "magic-origins": {
+      "last_scanned": "2026-04-14T05:38:53.418917+00:00",
+      "cards_found": 163
+    },
+    "magic-murders-at-karlov-manor-commander": {
+      "last_scanned": "2026-04-14T05:40:13.163722+00:00",
+      "cards_found": 227
+    },
+    "magic-aetherdrift": {
+      "last_scanned": "2026-04-14T05:43:22.845751+00:00",
+      "cards_found": 255
+    },
+    "magic-midnight-hunt-commander": {
+      "last_scanned": "2026-04-14T05:44:04.797248+00:00",
+      "cards_found": 135
+    },
+    "magic-apocalypse": {
+      "last_scanned": "2026-04-14T05:44:42.384189+00:00",
+      "cards_found": 89
+    },
+    "magic-war-of-the-spark-promos": {
+      "last_scanned": "2026-04-14T05:45:33.526145+00:00",
+      "cards_found": 0
+    },
+    "magic-duskmourn-house-of-horror-commander": {
+      "last_scanned": "2026-04-14T05:46:53.445349+00:00",
+      "cards_found": 181
+    },
+    "magic-zendikar-rising-promos": {
+      "last_scanned": "2026-04-14T05:47:36.913113+00:00",
+      "cards_found": 10
+    },
+    "magic-foundations-jumpstart": {
+      "last_scanned": "2026-04-14T05:50:30.833910+00:00",
+      "cards_found": 6
+    },
+    "magic-avatar-the-last-airbender-promos": {
+      "last_scanned": "2026-04-14T05:50:54.173967+00:00",
+      "cards_found": 0
+    },
+    "magic-torment": {
+      "last_scanned": "2026-04-14T05:51:23.911422+00:00",
+      "cards_found": 92
+    },
+    "magic-neon-dynasty-commander": {
+      "last_scanned": "2026-04-14T05:52:04.500141+00:00",
+      "cards_found": 147
+    },
+    "magic-future-sight": {
+      "last_scanned": "2026-04-14T05:52:50.369684+00:00",
+      "cards_found": 117
+    },
+    "magic-commander-collection-black": {
+      "last_scanned": "2026-04-14T05:52:57.289917+00:00",
+      "cards_found": 9
+    },
+    "magic-teenage-mutant-ninja-turtles-source-material": {
+      "last_scanned": "2026-04-14T05:53:09.668441+00:00",
+      "cards_found": 1
+    },
+    "magic-modern-masters": {
+      "last_scanned": "2026-04-14T05:54:04.572654+00:00",
+      "cards_found": 191
+    },
+    "magic-lord-of-the-rings-tales-of-middle-earth": {
+      "last_scanned": "2026-04-14T05:54:28.142756+00:00",
+      "cards_found": 43
+    },
+    "magic-fin-standard-showdown": {
+      "last_scanned": "2026-04-14T05:54:37.080650+00:00",
+      "cards_found": 0
+    },
+    "magic-ravnica-city-of-guilds": {
+      "last_scanned": "2026-04-14T05:55:42.414534+00:00",
+      "cards_found": 155
+    },
+    "magic-conflux": {
+      "last_scanned": "2026-04-14T05:56:21.675001+00:00",
+      "cards_found": 103
+    },
+    "fcbf-cyber-ninja-squad": {
+      "last_scanned": "2026-04-14T05:56:31.850260+00:00",
+      "cards_found": 0
+    }
+  },
+  "queue": [
+    {
+      "slug": "magic-modern-masters-2015",
+      "title": "Modern Masters 2015 Edition",
+      "page_count": 10,
+      "card_count": 334,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secrets-of-strixhaven-commander",
+      "title": "Secrets of Strixhaven Commander",
+      "page_count": 13,
+      "card_count": 436,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "player-rewards",
+      "title": "Player Rewards",
+      "page_count": 1,
+      "card_count": 7,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dominaria-united",
+      "title": "Dominaria United",
+      "page_count": 23,
+      "card_count": 824,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "startlekar",
+      "title": "Startlekar",
+      "page_count": 1,
+      "card_count": 22,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2012",
+      "title": "Judge Gift Cards 2012",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "special",
+      "title": "Special",
+      "page_count": 1,
+      "card_count": 25,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2010",
+      "title": "Magic 2010 Core Set",
+      "page_count": 7,
+      "card_count": 251,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-regional-championship-qualifiers-2023",
+      "title": "Regional Championship Qualifiers 2023",
+      "page_count": 1,
+      "card_count": 3,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-lost-caverns-of-ixalan",
+      "title": "The Lost Caverns of Ixalan",
+      "page_count": 25,
+      "card_count": 877,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unlimited-edition",
+      "title": "Unlimited Edition",
+      "page_count": 3,
+      "card_count": 83,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-amonkhet",
+      "title": "Amonkhet",
+      "page_count": 14,
+      "card_count": 480,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-historic-anthology-1",
+      "title": "Historic Anthology 1",
+      "page_count": 1,
+      "card_count": 20,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tales-of-middle-earth-commander",
+      "title": "Tales of Middle Earth Commander",
+      "page_count": 15,
+      "card_count": 537,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fifth-dawn",
+      "title": "Fifth Dawn",
+      "page_count": 5,
+      "card_count": 180,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-alliances",
+      "title": "Alliances",
+      "page_count": 5,
+      "card_count": 147,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "booster-box",
+      "title": "Booster Box",
+      "page_count": 3,
+      "card_count": 90,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "collection-boxes-tins",
+      "title": "Collection Boxes/Tins",
+      "page_count": 3,
+      "card_count": 86,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "challenger-decks",
+      "title": "Challenger Decks",
+      "page_count": 1,
+      "card_count": 16,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ugins-fate",
+      "title": "Ugin's Fate",
+      "page_count": 1,
+      "card_count": 26,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-jumpstart",
+      "title": "Jumpstart",
+      "page_count": 14,
+      "card_count": 499,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-phyrexia-all-will-be-one-commander",
+      "title": "Phyrexia: All Will Be One Commander",
+      "page_count": 6,
+      "card_count": 206,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2015",
+      "title": "Magic 2015 Core Set",
+      "page_count": 10,
+      "card_count": 353,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-wizards-play-network-2022",
+      "title": "Wizards Play Network 2022",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-legends",
+      "title": "From the Vault: Legends",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-double-masters-2022",
+      "title": "Double Masters 2022",
+      "page_count": 28,
+      "card_count": 1004,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-exiled",
+      "title": "From the Vault: Exiled",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-archenemy",
+      "title": "Archenemy",
+      "page_count": 4,
+      "card_count": 136,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-ultimate-edition",
+      "title": "Secret Lair: Ultimate Edition",
+      "page_count": 1,
+      "card_count": 21,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-venser-vs-koth",
+      "title": "Duel Decks: Venser vs. Koth",
+      "page_count": 2,
+      "card_count": 68,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-final-fantasy-regional-promos",
+      "title": "Final Fantasy Regional Promos",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-core-set-2019",
+      "title": "Core Set 2019",
+      "page_count": 13,
+      "card_count": 451,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dragons-of-tarkir",
+      "title": "Dragons of Tarkir",
+      "page_count": 11,
+      "card_count": 362,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-adventures-in-the-forgotten-realms",
+      "title": "Adventures in the Forgotten Realms",
+      "page_count": 24,
+      "card_count": 849,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-premium-deck-series-fire-and-lightning",
+      "title": "Premium Deck Series: Fire and Lightning",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-shadowmoor",
+      "title": "Shadowmoor",
+      "page_count": 9,
+      "card_count": 292,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-transform",
+      "title": "From the Vault: Transform",
+      "page_count": 1,
+      "card_count": 28,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-theros-beyond-death",
+      "title": "Theros Beyond Death",
+      "page_count": 15,
+      "card_count": 505,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kaladesh-inventions",
+      "title": "Kaladesh Inventions",
+      "page_count": 2,
+      "card_count": 55,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-lorwyn-eclipsed",
+      "title": "Lorwyn Eclipsed",
+      "page_count": 23,
+      "card_count": 812,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2017",
+      "title": "Commander 2017",
+      "page_count": 9,
+      "card_count": 321,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-edge-of-eternities-stellar-sights",
+      "title": "Edge of Eternities: Stellar Sights",
+      "page_count": 8,
+      "card_count": 277,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-collection-green",
+      "title": "Commander Collection: Green",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-legends-battle-for-baldurs-gate",
+      "title": "Commander Legends: Battle for Baldur's Gate",
+      "page_count": 42,
+      "card_count": 1501,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2021",
+      "title": "Commander 2021",
+      "page_count": 19,
+      "card_count": 659,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-alara-reborn",
+      "title": "Alara Reborn",
+      "page_count": 5,
+      "card_count": 161,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-murders-at-karlov-manor-standard-showdown",
+      "title": "Murders at Karlov Manor Standard Showdown",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-planechase-anthology",
+      "title": "Planechase Anthology",
+      "page_count": 7,
+      "card_count": 241,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-double-masters",
+      "title": "DOUBLE MASTERS",
+      "page_count": 17,
+      "card_count": 597,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-anthology",
+      "title": "Commander Anthology",
+      "page_count": 9,
+      "card_count": 320,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-onslaught",
+      "title": "Onslaught",
+      "page_count": 10,
+      "card_count": 346,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-bloomburrow-commander",
+      "title": "Bloomburrow Commander",
+      "page_count": 14,
+      "card_count": 489,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-avatar-the-last-airbender-eternal",
+      "title": "Avatar: The Last Airbender Eternal",
+      "page_count": 18,
+      "card_count": 634,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-jace-vs-vraska",
+      "title": "Duel Decks: Jace vs. Vraska",
+      "page_count": 1,
+      "card_count": 7,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-planeshift",
+      "title": "Planeshift",
+      "page_count": 5,
+      "card_count": 154,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-crimson-vow-promos",
+      "title": "Innistrad: Crimson Vow Promos",
+      "page_count": 3,
+      "card_count": 84,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "dci-judge-promo",
+      "title": "DCI Judge Reward Promo",
+      "page_count": 2,
+      "card_count": 38,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-special-guests",
+      "title": "Special Guests",
+      "page_count": 8,
+      "card_count": 283,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-stronghold",
+      "title": "Stronghold",
+      "page_count": 5,
+      "card_count": 147,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-weatherlight",
+      "title": "Weatherlight",
+      "page_count": 5,
+      "card_count": 168,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "yummy-tokens",
+      "title": "Yummy Tokens",
+      "page_count": 1,
+      "card_count": 10,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-invasion",
+      "title": "Invasion",
+      "page_count": 10,
+      "card_count": 347,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2020",
+      "title": "Commander 2020",
+      "page_count": 10,
+      "card_count": 342,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2020",
+      "title": "Judge Gift Cards 2020",
+      "page_count": 1,
+      "card_count": 10,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-antiquities",
+      "title": "Antiquities",
+      "page_count": 3,
+      "card_count": 102,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "fcbf-dragon-chief",
+      "title": "Dragon Chief",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2021-lunar-new-year",
+      "title": "2021 Lunar New Year",
+      "page_count": 1,
+      "card_count": 3,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-chronicles",
+      "title": "Chronicles",
+      "page_count": 4,
+      "card_count": 117,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mystery-booster-2",
+      "title": "Mystery Booster 2",
+      "page_count": 14,
+      "card_count": 485,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-anthologies",
+      "title": "Anthologies",
+      "page_count": 3,
+      "card_count": 85,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-portal-demo-game",
+      "title": "Portal Demo Game",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons",
+      "title": "Modern Horizons",
+      "page_count": 10,
+      "card_count": 352,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2011",
+      "title": "Commander (2011)",
+      "page_count": 9,
+      "card_count": 311,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-betrayers-of-kamigawa",
+      "title": "Betrayers of Kamigawa",
+      "page_count": 5,
+      "card_count": 171,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-universes-within",
+      "title": "Universes Within",
+      "page_count": 1,
+      "card_count": 23,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kaladesh",
+      "title": "Kaladesh",
+      "page_count": 12,
+      "card_count": 429,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-final-fantasy-promos",
+      "title": "Final Fantasy Promos",
+      "page_count": 3,
+      "card_count": 94,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "dominaria-remastered",
+      "title": "Dominaria Remastered",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-murders-at-karlov-manor",
+      "title": "Murders at Karlov Manor",
+      "page_count": 24,
+      "card_count": 864,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-knights-vs-dragons",
+      "title": "Duel Decks: Knights vs. Dragons",
+      "page_count": 2,
+      "card_count": 68,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "yugioh-starter-deck",
+      "title": "Starter Deck",
+      "page_count": 2,
+      "card_count": 53,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dominaria-united-commander",
+      "title": "Dominaria United Commander",
+      "page_count": 13,
+      "card_count": 434,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-eternal-masters",
+      "title": "Eternal Masters",
+      "page_count": 11,
+      "card_count": 375,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secrets-of-strixhaven-mystical-archive",
+      "title": "Secrets of Strixhaven Mystical Archive",
+      "page_count": 13,
+      "card_count": 462,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secrets-of-strixhaven",
+      "title": "Secrets of Strixhaven",
+      "page_count": 21,
+      "card_count": 734,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-marvels-spider-man-eternal",
+      "title": "Marvel's Spider-Man Eternal",
+      "page_count": 1,
+      "card_count": 34,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-limited-edition-alpha",
+      "title": "Limited Edition Alpha",
+      "page_count": 1,
+      "card_count": 35,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-guildpact",
+      "title": "Guildpact",
+      "page_count": 6,
+      "card_count": 182,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-time-spiral-remastered",
+      "title": "Time Spiral Remastered",
+      "page_count": 24,
+      "card_count": 836,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2018",
+      "title": "Judge Gift Cards 2018",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "textless",
+      "title": "Textless",
+      "page_count": 1,
+      "card_count": 19,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mercadian-masques",
+      "title": "Mercadian Masques",
+      "page_count": 10,
+      "card_count": 342,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2017",
+      "title": "Judge Gift Cards 2017",
+      "page_count": 1,
+      "card_count": 9,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "fcbf-drums-adventures",
+      "title": "Drum's Adventures",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-legends",
+      "title": "Legends",
+      "page_count": 10,
+      "card_count": 328,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad",
+      "title": "Innistrad",
+      "page_count": 9,
+      "card_count": 312,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-rise-of-the-eldrazi",
+      "title": "Rise of the Eldrazi",
+      "page_count": 7,
+      "card_count": 250,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-urzas-legacy",
+      "title": "Urza's Legacy",
+      "page_count": 5,
+      "card_count": 154,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-regional-championship-qualifiers-2022",
+      "title": "Regional Championship Qualifiers 2022",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-march-of-the-machine-promos",
+      "title": "March of the Machine Promos",
+      "page_count": 6,
+      "card_count": 188,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-revised-edition",
+      "title": "Revised Edition",
+      "page_count": 7,
+      "card_count": 244,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unhinged",
+      "title": "Unhinged",
+      "page_count": 1,
+      "card_count": 14,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-aetherdrift-promos",
+      "title": "Aetherdrift Promos",
+      "page_count": 7,
+      "card_count": 234,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-historic-anthology-4",
+      "title": "Historic Anthology 4",
+      "page_count": 1,
+      "card_count": 25,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "boosters",
+      "title": "Boosters",
+      "page_count": 2,
+      "card_count": 58,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-lord-of-the-rings-tales-of-middle-earth",
+      "title": "The Lord of the Rings: Tales of Middle-earth",
+      "page_count": 26,
+      "card_count": 904,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-garruk-vs-liliana",
+      "title": "Duel Decks: Garruk vs. Liliana",
+      "page_count": 2,
+      "card_count": 54,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-shadows-over-innistrad",
+      "title": "Shadows over Innistrad",
+      "page_count": 14,
+      "card_count": 481,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-brothers-war",
+      "title": "The Brothers' War",
+      "page_count": 23,
+      "card_count": 828,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2018",
+      "title": "Commander 2018",
+      "page_count": 10,
+      "card_count": 331,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judgment",
+      "title": "Judgment",
+      "page_count": 5,
+      "card_count": 151,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-twenty",
+      "title": "From the Vault: Twenty",
+      "page_count": 1,
+      "card_count": 20,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commanders-arsenal",
+      "title": "Commander's Arsenal",
+      "page_count": 1,
+      "card_count": 18,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-oath-of-the-gatewatch",
+      "title": "Oath of the Gatewatch",
+      "page_count": 9,
+      "card_count": 295,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-brothers-war-promos",
+      "title": "The Brothers' War Promos",
+      "page_count": 3,
+      "card_count": 87,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-bloomburrow-promos",
+      "title": "Bloomburrow Promos",
+      "page_count": 7,
+      "card_count": 238,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-final-fantasy-through-the-ages",
+      "title": "Final Fantasy: Through the Ages",
+      "page_count": 4,
+      "card_count": 128,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "idw",
+      "title": "IDW",
+      "page_count": 1,
+      "card_count": 16,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-worldwake",
+      "title": "Worldwake",
+      "page_count": 5,
+      "card_count": 167,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-sorin-vs-tibalt",
+      "title": "Duel Decks: Sorin vs. Tibalt",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-speed-vs-cunning",
+      "title": "Duel Decks: Speed vs. Cunning",
+      "page_count": 2,
+      "card_count": 72,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-throne-of-eldraine",
+      "title": "Throne of Eldraine",
+      "page_count": 15,
+      "card_count": 508,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "yugioh-token",
+      "title": "Token",
+      "page_count": 1,
+      "card_count": 13,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-edge-of-eternities",
+      "title": "Edge of Eternities",
+      "page_count": 21,
+      "card_count": 746,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-lore",
+      "title": "From the Vault: Lore",
+      "page_count": 1,
+      "card_count": 16,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ravnica-clue-edition",
+      "title": "Ravnica: Clue Edition",
+      "page_count": 9,
+      "card_count": 289,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dominaria",
+      "title": "Dominaria",
+      "page_count": 13,
+      "card_count": 446,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-foundations",
+      "title": "Foundations",
+      "page_count": 33,
+      "card_count": 1156,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-marvels-spider-man",
+      "title": "Marvel's Spider-Man",
+      "page_count": 16,
+      "card_count": 550,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-merfolk-vs-goblins",
+      "title": "Duel Decks: Merfolk vs. Goblins",
+      "page_count": 2,
+      "card_count": 63,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-lost-caverns-of-ixalan-commander",
+      "title": "Lost Caverns of Ixalan Commander",
+      "page_count": 14,
+      "card_count": 470,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-crimson-vow-commander",
+      "title": "Crimson Vow Commander",
+      "page_count": 11,
+      "card_count": 369,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fin-spotlight",
+      "title": "FIN Magic Spotlight",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-brothers-war-commander",
+      "title": "The Brothers' War Commander",
+      "page_count": 10,
+      "card_count": 329,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-relics",
+      "title": "From the Vault: Relics",
+      "page_count": 1,
+      "card_count": 13,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dominaria-remastered",
+      "title": "Dominaria Remastered",
+      "page_count": 26,
+      "card_count": 927,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-march-of-the-machine-the-aftermath",
+      "title": "March of the Machine: The Aftermath",
+      "page_count": 9,
+      "card_count": 317,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fate-reforged",
+      "title": "Fate Reforged",
+      "page_count": 8,
+      "card_count": 263,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-3",
+      "title": "Modern Horizons 3",
+      "page_count": 27,
+      "card_count": 970,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "promo",
+      "title": "Promo",
+      "page_count": 3,
+      "card_count": 95,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-urzas-destiny",
+      "title": "Urza's Destiny",
+      "page_count": 5,
+      "card_count": 157,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-elspeth-vs-kiora",
+      "title": "Duel Decks: Elspeth vs. Kiora",
+      "page_count": 2,
+      "card_count": 67,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-drop-series",
+      "title": "Secret Lair Drop Series",
+      "page_count": 1,
+      "card_count": 30,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-final-fantasy",
+      "title": "Final Fantasy",
+      "page_count": 33,
+      "card_count": 1153,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "yugioh-lord-of-the-tachyon-galaxy",
+      "title": "Lord of the Tachyon Galaxy",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-midnight-hunt",
+      "title": "Innistrad Midnight Hunt",
+      "page_count": 24,
+      "card_count": 841,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-30th-anniversary-countdown-kit",
+      "title": "Secret Lair 30th Anniversary Countdown Kit",
+      "page_count": 2,
+      "card_count": 60,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-lost-caverns-of-ixalan-promos",
+      "title": "The Lost Caverns of Ixalan Promos",
+      "page_count": 7,
+      "card_count": 221,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-drop-promos",
+      "title": "Secret Lair Drop Promos",
+      "page_count": 1,
+      "card_count": 32,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-list",
+      "title": "The List",
+      "page_count": 48,
+      "card_count": 1722,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-archenemy-nicol-bolas",
+      "title": "Archenemy: Nicol Bolas",
+      "page_count": 4,
+      "card_count": 126,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-aetherdrift-commander",
+      "title": "Aetherdrift Commander",
+      "page_count": 6,
+      "card_count": 184,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-zendikar-vs-eldrazi",
+      "title": "Duel Decks: Zendikar vs. Eldrazi",
+      "page_count": 3,
+      "card_count": 80,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-anthology-volume-ii",
+      "title": "Commander Anthology Volume II",
+      "page_count": 9,
+      "card_count": 313,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "strixhaven",
+      "title": "Strixhaven",
+      "page_count": 1,
+      "card_count": 7,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-transformers",
+      "title": "Transformers",
+      "page_count": 2,
+      "card_count": 60,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "judge-promo",
+      "title": "Judge Promo",
+      "page_count": 2,
+      "card_count": 38,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-showdown",
+      "title": "Secret Lair Showdown",
+      "page_count": 2,
+      "card_count": 41,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-exodus",
+      "title": "Exodus",
+      "page_count": 4,
+      "card_count": 144,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dissension",
+      "title": "Dissension",
+      "page_count": 6,
+      "card_count": 193,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-time-spiral",
+      "title": "Time Spiral",
+      "page_count": 9,
+      "card_count": 300,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-mind-vs-might",
+      "title": "Duel Decks: Mind vs. Might",
+      "page_count": 2,
+      "card_count": 65,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ultimate-box-topper",
+      "title": "Ultimate Box Topper",
+      "page_count": 2,
+      "card_count": 40,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mystery-booster-retail-edition-foils",
+      "title": "Mystery Booster Retail Edition Foils",
+      "page_count": 4,
+      "card_count": 121,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-30th-anniversary-promos",
+      "title": "30th Anniversary Promos",
+      "page_count": 1,
+      "card_count": 9,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2014",
+      "title": "Judge Gift Cards 2014",
+      "page_count": 1,
+      "card_count": 14,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kaldheim-promos",
+      "title": "Kaldheim Promos",
+      "page_count": 7,
+      "card_count": 221,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-battle-for-zendikar",
+      "title": "Battle for Zendikar",
+      "page_count": 12,
+      "card_count": 406,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tempest",
+      "title": "Tempest",
+      "page_count": 10,
+      "card_count": 340,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-masters",
+      "title": "Commander Masters",
+      "page_count": 40,
+      "card_count": 1427,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-legions",
+      "title": "Legions",
+      "page_count": 5,
+      "card_count": 151,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-magicfest-2020",
+      "title": "MagicFest 2020",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-introductory-two-player-set",
+      "title": "Introductory Two-Player Set",
+      "page_count": 2,
+      "card_count": 67,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-shards-of-alara",
+      "title": "Shards of Alara",
+      "page_count": 8,
+      "card_count": 265,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-outlaws-of-thunder-junction-commander",
+      "title": "Outlaws of Thunder Junction Commander",
+      "page_count": 12,
+      "card_count": 414,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-lorwyn",
+      "title": "Lorwyn",
+      "page_count": 9,
+      "card_count": 310,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2013",
+      "title": "Commander (2013)",
+      "page_count": 10,
+      "card_count": 356,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-remastered",
+      "title": "Innistrad Remastered",
+      "page_count": 28,
+      "card_count": 989,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-seventh-edition",
+      "title": "Seventh Edition",
+      "page_count": 14,
+      "card_count": 485,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-saviors-of-kamigawa",
+      "title": "Saviors of Kamigawa",
+      "page_count": 5,
+      "card_count": 172,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tarkir-dragonstorm",
+      "title": "Tarkir Dragonstorm",
+      "page_count": 24,
+      "card_count": 835,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-warhammer-40-000",
+      "title": "Warhammer 40,000",
+      "page_count": 10,
+      "card_count": 326,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-morningtide",
+      "title": "Morningtide",
+      "page_count": 5,
+      "card_count": 157,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duskmourn-house-of-horror",
+      "title": "Duskmourn: House of Horror",
+      "page_count": 23,
+      "card_count": 803,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2012",
+      "title": "Magic 2012 Core Set",
+      "page_count": 8,
+      "card_count": 262,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-homelands",
+      "title": "Homelands",
+      "page_count": 4,
+      "card_count": 115,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-divine-vs-demonic",
+      "title": "Duel Decks: Divine vs. Demonic",
+      "page_count": 2,
+      "card_count": 57,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-scourge",
+      "title": "Scourge",
+      "page_count": 5,
+      "card_count": 152,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2014",
+      "title": "Magic 2014 Core Set",
+      "page_count": 9,
+      "card_count": 305,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "power-9",
+      "title": "Power 9",
+      "page_count": 1,
+      "card_count": 27,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-war-of-the-spark",
+      "title": "War Of The Spark",
+      "page_count": 13,
+      "card_count": 433,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2022",
+      "title": "Judge Gift Cards 2022",
+      "page_count": 1,
+      "card_count": 12,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "assassins-creed",
+      "title": "Assassin's Creed",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mirrodin-besieged",
+      "title": "Mirrodin Besieged",
+      "page_count": 5,
+      "card_count": 166,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-historic-anthology-5",
+      "title": "Historic Anthology 5",
+      "page_count": 2,
+      "card_count": 50,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-dragons",
+      "title": "From the Vault: Dragons",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-2-timeshifts",
+      "title": "Modern Horizons 2 Timeshifts",
+      "page_count": 1,
+      "card_count": 32,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-marvels-spider-man-promos",
+      "title": "Marvel's Spider-Man Promos",
+      "page_count": 1,
+      "card_count": 13,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-historic-anthology-2",
+      "title": "Historic Anthology 2",
+      "page_count": 1,
+      "card_count": 25,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2013",
+      "title": "Magic 2013 Core Set",
+      "page_count": 8,
+      "card_count": 268,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-3-commander",
+      "title": "Modern Horizons 3 Commander",
+      "page_count": 22,
+      "card_count": 766,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-30th-anniversary-history-promos",
+      "title": "30th Anniversary History Promos",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-big-score",
+      "title": "The Big Score",
+      "page_count": 6,
+      "card_count": 185,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-arena-beginner-set",
+      "title": "Arena Beginner Set",
+      "page_count": 4,
+      "card_count": 115,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-crimson-vow",
+      "title": "Innistrad: Crimson Vow",
+      "page_count": 24,
+      "card_count": 862,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mystery-booster-playtest-cards-2021",
+      "title": "Mystery Booster Playtest Cards 2021",
+      "page_count": 4,
+      "card_count": 121,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unfinity",
+      "title": "Unfinity",
+      "page_count": 29,
+      "card_count": 1026,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-theros",
+      "title": "Theros",
+      "page_count": 9,
+      "card_count": 314,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-wilds-of-eldraine",
+      "title": "Wilds of Eldraine",
+      "page_count": 22,
+      "card_count": 790,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-list-unfinity-foil-edition",
+      "title": "The List (Unfinity Foil Edition)",
+      "page_count": 2,
+      "card_count": 62,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-signature-spellbook-chandra",
+      "title": "Signature Spellbook: Chandra",
+      "page_count": 1,
+      "card_count": 16,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-breaking-news",
+      "title": "Breaking News",
+      "page_count": 5,
+      "card_count": 145,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-nissa-vs-ob-nixilis",
+      "title": "Duel Decks: Nissa vs. Ob Nixilis",
+      "page_count": 3,
+      "card_count": 75,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-love-your-lgs",
+      "title": "Love Your LGS",
+      "page_count": 1,
+      "card_count": 2,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-planechase-2012",
+      "title": "Planechase 2012 Edition",
+      "page_count": 4,
+      "card_count": 130,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-heroes-vs-monsters",
+      "title": "Duel Decks: Heroes vs. Monsters",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-marvel-universe",
+      "title": "Marvel Universe",
+      "page_count": 3,
+      "card_count": 80,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unsanctioned",
+      "title": "Unsanctioned",
+      "page_count": 3,
+      "card_count": 95,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "commander-legends-battle-for-baldur-s-gate",
+      "title": "Commander Legends: Battle for Baldur\u2019s Gate",
+      "page_count": 1,
+      "card_count": 12,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-scars-of-mirrodin",
+      "title": "Scars of Mirrodin",
+      "page_count": 8,
+      "card_count": 264,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "universes-beyond-doctor-who",
+      "title": "Universes Beyond: Doctor Who",
+      "page_count": 1,
+      "card_count": 6,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-elspeth-vs-tezzeret",
+      "title": "Duel Decks: Elspeth vs. Tezzeret",
+      "page_count": 2,
+      "card_count": 70,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-3-promos",
+      "title": "Modern Horizons 3 Promos",
+      "page_count": 3,
+      "card_count": 80,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-hour-of-devastation",
+      "title": "Hour of Devastation",
+      "page_count": 11,
+      "card_count": 373,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-teenage-mutant-ninja-turtles-eternal",
+      "title": "Teenage Mutant Ninja Turtles Eternal",
+      "page_count": 7,
+      "card_count": 249,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-event-deck-2014",
+      "title": "Modern Event Deck 2014",
+      "page_count": 1,
+      "card_count": 16,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dark-ascension",
+      "title": "Dark Ascension",
+      "page_count": 6,
+      "card_count": 189,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ninth-edition",
+      "title": "Ninth Edition",
+      "page_count": 10,
+      "card_count": 348,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-wizards-play-network-2021",
+      "title": "Wizards Play Network 2021",
+      "page_count": 1,
+      "card_count": 3,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mirrodin",
+      "title": "Mirrodin",
+      "page_count": 9,
+      "card_count": 311,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-new-capenna-commander",
+      "title": "New Capenna Commander",
+      "page_count": 25,
+      "card_count": 895,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-bloomburrow",
+      "title": "Bloomburrow",
+      "page_count": 23,
+      "card_count": 807,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-rivals-of-ixalan",
+      "title": "Rivals of Ixalan",
+      "page_count": 10,
+      "card_count": 353,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-ajani-vs-nicol-bolas",
+      "title": "Duel Decks: Ajani vs. Nicol Bolas",
+      "page_count": 2,
+      "card_count": 72,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-2",
+      "title": "Modern Horizons 2",
+      "page_count": 30,
+      "card_count": 1053,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-streets-of-new-capenna",
+      "title": "Streets of New Capenna",
+      "page_count": 26,
+      "card_count": 902,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-dragons-maze",
+      "title": "Dragon's Maze",
+      "page_count": 6,
+      "card_count": 186,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-eventide",
+      "title": "Eventide",
+      "page_count": 6,
+      "card_count": 190,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-avatar-the-last-airbender",
+      "title": "Avatar the last Airbender",
+      "page_count": 22,
+      "card_count": 772,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2014",
+      "title": "Commander 2014",
+      "page_count": 11,
+      "card_count": 362,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ikoria-lair-of-behemoths-promos",
+      "title": "Ikoria: Lair of Behemoths Promos",
+      "page_count": 2,
+      "card_count": 69,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kaldheim-commander",
+      "title": "Kaldheim Commander",
+      "page_count": 4,
+      "card_count": 144,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-coldsnap",
+      "title": "Coldsnap",
+      "page_count": 5,
+      "card_count": 169,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2021",
+      "title": "Judge Gift Cards 2021",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-gatecrash",
+      "title": "Gatecrash",
+      "page_count": 9,
+      "card_count": 299,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-strixhaven-school-of-mages",
+      "title": "Strixhaven: School of Mages",
+      "page_count": 23,
+      "card_count": 799,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "tokens-for-mtg",
+      "title": "Tokens for MTG",
+      "page_count": 1,
+      "card_count": 27,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-theros-beyond-death-promos",
+      "title": "Theros Beyond Death Promos",
+      "page_count": 4,
+      "card_count": 134,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-elves-vs-inventors",
+      "title": "Duel Decks: Elves vs. Inventors",
+      "page_count": 3,
+      "card_count": 76,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-nemesis",
+      "title": "Nemesis",
+      "page_count": 5,
+      "card_count": 149,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-blessed-vs-cursed",
+      "title": "Duel Decks: Blessed vs. Cursed",
+      "page_count": 3,
+      "card_count": 80,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-edge-of-eternities-commander",
+      "title": "Edge of Eternities Commander",
+      "page_count": 11,
+      "card_count": 382,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "dci-promo",
+      "title": "DCI Promo",
+      "page_count": 6,
+      "card_count": 201,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-double-feature",
+      "title": "Innistrad: Double Feature",
+      "page_count": 30,
+      "card_count": 1069,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-zendikar",
+      "title": "Zendikar",
+      "page_count": 9,
+      "card_count": 296,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-champions-of-kamigawa",
+      "title": "Champions of Kamigawa",
+      "page_count": 9,
+      "card_count": 305,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-iconic-masters",
+      "title": "Iconic Masters",
+      "page_count": 11,
+      "card_count": 373,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-return-to-ravnica",
+      "title": "Return to Ravnica",
+      "page_count": 10,
+      "card_count": 340,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-battle-for-baldurs-gate-promos",
+      "title": "Battle for Baldur's Gate Promos",
+      "page_count": 3,
+      "card_count": 99,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-planar-chaos",
+      "title": "Planar Chaos",
+      "page_count": 5,
+      "card_count": 178,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fallen-empires",
+      "title": "Fallen Empires",
+      "page_count": 3,
+      "card_count": 104,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2016",
+      "title": "Judge Gift Cards 2016",
+      "page_count": 1,
+      "card_count": 7,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-murders-at-karlov-manor-promos",
+      "title": "Murders at Karlov Manor Promos",
+      "page_count": 8,
+      "card_count": 270,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-love-your-lgs-2022",
+      "title": "Love Your LGS 2022",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-signature-spellbook-jace",
+      "title": "Signature Spellbook: Jace",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-eldritch-moon",
+      "title": "Eldritch Moon",
+      "page_count": 10,
+      "card_count": 357,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-conspiracy-take-the-crown",
+      "title": "Conspiracy: Take the Crown",
+      "page_count": 8,
+      "card_count": 270,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-wizards-play-network-2024",
+      "title": "Wizards Play Network 2024",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-izzet-vs-golgari",
+      "title": "Duel Decks: Izzet vs. Golgari",
+      "page_count": 3,
+      "card_count": 74,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-phyrexia-all-will-be-one-promos",
+      "title": "Phyrexia: All Will Be One Promos",
+      "page_count": 7,
+      "card_count": 240,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-journey-into-nyx",
+      "title": "Journey Into Nyx",
+      "page_count": 6,
+      "card_count": 204,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-streets-of-new-capenna-promos",
+      "title": "Streets of New Capenna Promos",
+      "page_count": 7,
+      "card_count": 240,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-march-of-the-machine",
+      "title": "March of the Machine",
+      "page_count": 23,
+      "card_count": 800,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-arabian-nights",
+      "title": "Arabian Nights",
+      "page_count": 3,
+      "card_count": 84,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kaldheim",
+      "title": "Kaldheim",
+      "page_count": 25,
+      "card_count": 872,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-love-your-lgs-2024",
+      "title": "Love Your LGS 2024",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ravnica-remastered",
+      "title": "Ravnica Remastered",
+      "page_count": 27,
+      "card_count": 955,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-khans-of-tarkir",
+      "title": "Khans of Tarkir",
+      "page_count": 10,
+      "card_count": 359,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-innistrad-midnight-hunt-promos",
+      "title": "Innistrad: Midnight Hunt Promos",
+      "page_count": 7,
+      "card_count": 220,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ice-age",
+      "title": "Ice Age",
+      "page_count": 11,
+      "card_count": 374,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2023",
+      "title": "Judge Gift Cards 2023",
+      "page_count": 1,
+      "card_count": 3,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-aether-revolt",
+      "title": "Aether Revolt",
+      "page_count": 9,
+      "card_count": 316,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-outlaws-of-thunder-junction",
+      "title": "Outlaws of Thunder Junction",
+      "page_count": 24,
+      "card_count": 829,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-throne-of-eldraine-promos",
+      "title": "Throne of Eldraine Promos",
+      "page_count": 4,
+      "card_count": 134,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-secret-lair-promos",
+      "title": "Secret Lair Promos",
+      "page_count": 1,
+      "card_count": 13,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-guilds-of-ravnica",
+      "title": "Guilds of Ravnica",
+      "page_count": 12,
+      "card_count": 406,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-realms",
+      "title": "From the Vault: Realms",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tenth-edition",
+      "title": "Tenth Edition",
+      "page_count": 11,
+      "card_count": 381,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-visions",
+      "title": "Visions",
+      "page_count": 5,
+      "card_count": 168,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-1-timeshifts",
+      "title": "Modern Horizons 1 Timeshifts",
+      "page_count": 3,
+      "card_count": 81,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ultimate-masters",
+      "title": "Ultimate Masters",
+      "page_count": 10,
+      "card_count": 359,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-new-phyrexia",
+      "title": "New Phyrexia",
+      "page_count": 6,
+      "card_count": 193,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-legends",
+      "title": "Commander Legends",
+      "page_count": 39,
+      "card_count": 1371,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-brothers-war-retro-artifacts",
+      "title": "The Brothers' War Retro Artifacts",
+      "page_count": 7,
+      "card_count": 252,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-masters-25",
+      "title": "Masters 25",
+      "page_count": 11,
+      "card_count": 381,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-portal",
+      "title": "Portal",
+      "page_count": 7,
+      "card_count": 226,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mystery-booster",
+      "title": "Mystery Booster",
+      "page_count": 48,
+      "card_count": 1694,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2019",
+      "title": "Commander 2019",
+      "page_count": 9,
+      "card_count": 323,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-battlebond",
+      "title": "Battlebond",
+      "page_count": 9,
+      "card_count": 299,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ponies-the-galloping",
+      "title": "Ponies: The Galloping",
+      "page_count": 1,
+      "card_count": 3,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tarkir-dragonstorm-commander",
+      "title": "Tarkir: Dragonstorm Commander",
+      "page_count": 13,
+      "card_count": 453,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-portal-three-kingdoms",
+      "title": "Portal Three Kingdoms",
+      "page_count": 5,
+      "card_count": 180,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-jumpstart-arena-exclusives",
+      "title": "Jumpstart Arena Exclusives",
+      "page_count": 1,
+      "card_count": 17,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-odyssey",
+      "title": "Odyssey",
+      "page_count": 10,
+      "card_count": 343,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-phyrexia-vs-the-coalition",
+      "title": "Duel Decks: Phyrexia vs. The Coalition",
+      "page_count": 2,
+      "card_count": 59,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-amonkhet-invocations",
+      "title": "Masterpiece Series: Amonkhet Invocations",
+      "page_count": 2,
+      "card_count": 54,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-zendikar-expeditions",
+      "title": "Battle for Zendikar: Expeditions",
+      "page_count": 2,
+      "card_count": 46,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-final-fantasy-commander",
+      "title": "Final Fantasy Commander",
+      "page_count": 25,
+      "card_count": 878,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2019",
+      "title": "Judge Gift Cards 2019",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-phyrexia-all-will-be-one",
+      "title": "Phyrexia: All Will Be One",
+      "page_count": 25,
+      "card_count": 885,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-urzas-saga",
+      "title": "Urza's Saga",
+      "page_count": 10,
+      "card_count": 337,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-signature-spellbook-gideon",
+      "title": "Signature Spellbook: Gideon",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-jace-vs-chandra",
+      "title": "Duel Decks: Jace vs. Chandra",
+      "page_count": 2,
+      "card_count": 57,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-classic-sixth-edition",
+      "title": "Classic Sixth Edition",
+      "page_count": 3,
+      "card_count": 78,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-teenage-mutant-ninja-turtles",
+      "title": "Teenage Mutant Ninja Turtles",
+      "page_count": 19,
+      "card_count": 653,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-store-championships-2022",
+      "title": "Store Championships 2022",
+      "page_count": 1,
+      "card_count": 10,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-eldritch-moon-promos",
+      "title": "Eldritch Moon Promos",
+      "page_count": 3,
+      "card_count": 78,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-explorers-of-ixalan",
+      "title": "Explorers of Ixalan",
+      "page_count": 2,
+      "card_count": 47,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-darksteel",
+      "title": "Darksteel",
+      "page_count": 5,
+      "card_count": 172,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-jurassic-world-collection",
+      "title": "Jurassic World Collection",
+      "page_count": 2,
+      "card_count": 71,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-kamigawa-neon-dynasty-promos",
+      "title": "Kamigawa: Neon Dynasty Promos",
+      "page_count": 6,
+      "card_count": 212,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unglued",
+      "title": "Unglued",
+      "page_count": 1,
+      "card_count": 18,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ixalan",
+      "title": "Ixalan",
+      "page_count": 14,
+      "card_count": 490,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-angels",
+      "title": "From the Vault: Angels",
+      "page_count": 1,
+      "card_count": 15,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-limited-edition-beta",
+      "title": "Limited Edition Beta",
+      "page_count": 3,
+      "card_count": 106,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-eighth-edition",
+      "title": "Eighth Edition",
+      "page_count": 10,
+      "card_count": 347,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-multiverse-legends",
+      "title": "Multiverse Legends",
+      "page_count": 8,
+      "card_count": 261,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-portal-second-age",
+      "title": "Portal Second Age",
+      "page_count": 5,
+      "card_count": 166,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-born-of-the-gods",
+      "title": "Born of the Gods",
+      "page_count": 6,
+      "card_count": 213,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2015",
+      "title": "Commander 2015",
+      "page_count": 10,
+      "card_count": 342,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2010",
+      "title": "Judge Gift Cards 2010",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-the-dark",
+      "title": "The Dark",
+      "page_count": 4,
+      "card_count": 123,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-wilds-of-eldraine-enchanting-tales",
+      "title": "Wilds of Eldraine: Enchanting Tales",
+      "page_count": 6,
+      "card_count": 186,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-san-diego-comic-con-2019",
+      "title": "San Diego Comic-Con 2019",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-forgotten-realms-commander",
+      "title": "Forgotten Realms Commander",
+      "page_count": 19,
+      "card_count": 661,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-strixhaven-school-of-mages-promos",
+      "title": "Strixhaven: School of Mages Promos",
+      "page_count": 7,
+      "card_count": 238,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-jumpstart-2022",
+      "title": "Jumpstart 2022",
+      "page_count": 24,
+      "card_count": 835,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "structuredeck",
+      "title": "StructureDeck",
+      "page_count": 1,
+      "card_count": 12,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-zendikar-rising-expeditions",
+      "title": "Zendikar Rising Expeditions",
+      "page_count": 2,
+      "card_count": 44,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-grn-guild-kit",
+      "title": "GRN Guild Kit",
+      "page_count": 4,
+      "card_count": 128,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-strixhaven-mystical-archive",
+      "title": "Strixhaven Mystical Archive",
+      "page_count": 10,
+      "card_count": 357,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-avacyn-restored",
+      "title": "Avacyn Restored",
+      "page_count": 8,
+      "card_count": 264,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-2011",
+      "title": "Magic 2011 Core Set",
+      "page_count": 8,
+      "card_count": 258,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-unstable",
+      "title": "Unstable",
+      "page_count": 7,
+      "card_count": 221,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-battle-royale-box-set",
+      "title": "Battle Royale Box Set",
+      "page_count": 4,
+      "card_count": 135,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-horizons-2-promos",
+      "title": "Modern Horizons 2 Promos",
+      "page_count": 3,
+      "card_count": 102,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-planechase",
+      "title": "Planechase",
+      "page_count": 4,
+      "card_count": 141,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-zendikar-rising-commander",
+      "title": "Zendikar Rising Commander",
+      "page_count": 5,
+      "card_count": 149,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-modern-masters-2017",
+      "title": "Modern Masters 2017",
+      "page_count": 11,
+      "card_count": 381,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-foundations-commander",
+      "title": "Foundations Commander",
+      "page_count": 1,
+      "card_count": 1,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-time-spiral-timeshifted",
+      "title": "Time Spiral: Timeshifted",
+      "page_count": 4,
+      "card_count": 132,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-love-your-lgs-2021",
+      "title": "Love Your LGS 2021",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-premium-deck-series-graveborn",
+      "title": "Premium Deck Series: Graveborn",
+      "page_count": 1,
+      "card_count": 30,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-mirage",
+      "title": "Mirage",
+      "page_count": 10,
+      "card_count": 333,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-core-set-2021-promos",
+      "title": "Core Set 2021 Promos",
+      "page_count": 4,
+      "card_count": 141,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-commander-2016",
+      "title": "Commander 2016",
+      "page_count": 11,
+      "card_count": 371,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-prophecy",
+      "title": "Prophecy",
+      "page_count": 4,
+      "card_count": 144,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-love-your-lgs-2025",
+      "title": "Love Your LGS 2025",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tarkir-dragonstorm-promos",
+      "title": "Tarkir: Dragonstorm Promos",
+      "page_count": 7,
+      "card_count": 240,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-zendikar-rising",
+      "title": "Zendikar Rising",
+      "page_count": 17,
+      "card_count": 609,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-judge-gift-cards-2015",
+      "title": "Judge Gift Cards 2015",
+      "page_count": 1,
+      "card_count": 8,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fifth-edition",
+      "title": "Fifth Edition",
+      "page_count": 3,
+      "card_count": 101,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-adventures-in-the-forgotten-realms-promos",
+      "title": "Adventures in the Forgotten Realms Promos",
+      "page_count": 9,
+      "card_count": 321,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-core-set-2020",
+      "title": "Core Set 2020",
+      "page_count": 14,
+      "card_count": 491,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ikoria-lair-of-behemoths",
+      "title": "Ikoria: Lair of Behemoths",
+      "page_count": 15,
+      "card_count": 535,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-game-day-promos",
+      "title": "Game Day Promos",
+      "page_count": 1,
+      "card_count": 4,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-fourth-edition",
+      "title": "Fourth Edition",
+      "page_count": 5,
+      "card_count": 172,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-core-set-2021",
+      "title": "Core Set 2021",
+      "page_count": 16,
+      "card_count": 574,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-year-of-the-rabbit-2023",
+      "title": "Year of the Rabbit 2023",
+      "page_count": 1,
+      "card_count": 5,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-from-the-vault-annihilation",
+      "title": "From the Vault: Annihilation",
+      "page_count": 1,
+      "card_count": 17,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-march-of-the-machine-commander",
+      "title": "March of the Machine Commander",
+      "page_count": 15,
+      "card_count": 528,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-tales-of-middle-earth-promos",
+      "title": "Tales of Middle-earth Promos",
+      "page_count": 3,
+      "card_count": 85,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duskmourn-house-of-horror-promos",
+      "title": "Duskmourn: House of Horror Promos",
+      "page_count": 8,
+      "card_count": 267,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-ravnica-allegiance",
+      "title": "Ravnica Allegiance",
+      "page_count": 11,
+      "card_count": 373,
+      "start_page": 1,
+      "is_new": true
+    },
+    {
+      "slug": "magic-duel-decks-elves-vs-goblins",
+      "title": "Duel Decks: Elves vs. Goblins",
+      "page_count": 2,
+      "card_count": 57,
+      "start_page": 1,
+      "is_new": true
+    }
+  ],
+  "last_run": "2026-04-14T05:57:02.862176+00:00",
+  "known_sets": [
+    "magic-30th-anniversary-history-promos",
+    "magic-30th-anniversary-promos",
+    "magic-2021-lunar-new-year",
+    "magic-adventures-in-the-forgotten-realms",
+    "magic-adventures-in-the-forgotten-realms-promos",
+    "magic-aether-revolt",
+    "magic-aetherdrift",
+    "magic-aetherdrift-commander",
+    "magic-aetherdrift-promos",
+    "magic-alara-reborn",
+    "magic-alliances",
+    "magic-amonkhet",
+    "magic-anthologies",
+    "magic-antiquities",
+    "magic-apocalypse",
+    "magic-arabian-nights",
+    "magic-archenemy",
+    "magic-archenemy-nicol-bolas",
+    "magic-arena-beginner-set",
+    "assassins-creed",
+    "magic-avacyn-restored",
+    "magic-avatar-the-last-airbender-eternal",
+    "magic-avatar-the-last-airbender-promos",
+    "magic-avatar-the-last-airbender",
+    "magic-battle-royale-box-set",
+    "magic-battlebond",
+    "magic-battle-for-baldurs-gate-promos",
+    "magic-battle-for-zendikar",
+    "magic-zendikar-expeditions",
+    "magic-betrayers-of-kamigawa",
+    "magic-bloomburrow",
+    "magic-bloomburrow-commander",
+    "magic-bloomburrow-promos",
+    "booster-box",
+    "boosters",
+    "magic-born-of-the-gods",
+    "magic-breaking-news",
+    "challenger-decks",
+    "magic-champions-of-kamigawa",
+    "magic-chronicles",
+    "magic-classic-sixth-edition",
+    "magic-coldsnap",
+    "collection-boxes-tins",
+    "magic-commanders-arsenal",
+    "magic-commander-2011",
+    "magic-commander-2013",
+    "magic-commander-2014",
+    "magic-commander-2015",
+    "magic-commander-2016",
+    "magic-commander-2017",
+    "magic-commander-2018",
+    "magic-commander-2019",
+    "magic-commander-2020",
+    "magic-commander-2021",
+    "magic-commander-anthology",
+    "magic-commander-anthology-volume-ii",
+    "magic-commander-collection-black",
+    "magic-commander-collection-green",
+    "magic-commander-legends",
+    "magic-commander-legends-battle-for-baldurs-gate",
+    "commander-legends-battle-for-baldur-s-gate",
+    "magic-commander-masters",
+    "magic-conflux",
+    "magic-conspiracy",
+    "magic-conspiracy-take-the-crown",
+    "magic-core-set-2019",
+    "magic-core-set-2020",
+    "magic-core-set-2021",
+    "magic-core-set-2021-promos",
+    "magic-crimson-vow-commander",
+    "fcbf-cyber-ninja-squad",
+    "dci-judge-promo",
+    "dci-promo",
+    "magic-double-masters",
+    "magic-dark-ascension",
+    "magic-darksteel",
+    "magic-dissension",
+    "magic-dominaria",
+    "dominaria-remastered",
+    "magic-dominaria-remastered",
+    "magic-dominaria-united",
+    "magic-dominaria-united-commander",
+    "magic-double-masters-2022",
+    "magic-dragons-maze",
+    "fcbf-dragon-chief",
+    "magic-dragons-of-tarkir",
+    "fcbf-drums-adventures",
+    "magic-duel-decks-ajani-vs-nicol-bolas",
+    "magic-duel-decks-blessed-vs-cursed",
+    "magic-duel-decks-divine-vs-demonic",
+    "magic-duel-decks-elspeth-vs-kiora",
+    "magic-duel-decks-elspeth-vs-tezzeret",
+    "magic-duel-decks-elves-vs-goblins",
+    "magic-duel-decks-elves-vs-inventors",
+    "magic-duel-decks-garruk-vs-liliana",
+    "magic-duel-decks-heroes-vs-monsters",
+    "magic-duel-decks-izzet-vs-golgari",
+    "magic-duel-decks-jace-vs-chandra",
+    "magic-duel-decks-jace-vs-vraska",
+    "magic-duel-decks-knights-vs-dragons",
+    "magic-duel-decks-merfolk-vs-goblins",
+    "magic-duel-decks-mind-vs-might",
+    "magic-duel-decks-nissa-vs-ob-nixilis",
+    "magic-duel-decks-phyrexia-vs-the-coalition",
+    "magic-duel-decks-sorin-vs-tibalt",
+    "magic-duel-decks-speed-vs-cunning",
+    "magic-duel-decks-venser-vs-koth",
+    "magic-duel-decks-zendikar-vs-eldrazi",
+    "magic-duskmourn-house-of-horror",
+    "magic-duskmourn-house-of-horror-commander",
+    "magic-duskmourn-house-of-horror-promos",
+    "magic-edge-of-eternities",
+    "magic-edge-of-eternities-stellar-sights",
+    "magic-edge-of-eternities-commander",
+    "magic-eighth-edition",
+    "magic-eldritch-moon",
+    "magic-eldritch-moon-promos",
+    "magic-eternal-masters",
+    "magic-eventide",
+    "magic-exodus",
+    "magic-explorers-of-ixalan",
+    "magic-fin-spotlight",
+    "magic-fin-standard-showdown",
+    "magic-fallen-empires",
+    "magic-fate-reforged",
+    "magic-fifth-dawn",
+    "magic-fifth-edition",
+    "magic-final-fantasy",
+    "magic-final-fantasy-through-the-ages",
+    "magic-final-fantasy-commander",
+    "magic-final-fantasy-promos",
+    "magic-final-fantasy-regional-promos",
+    "magic-forgotten-realms-commander",
+    "magic-foundations",
+    "magic-foundations-commander",
+    "magic-foundations-jumpstart",
+    "magic-fourth-edition",
+    "magic-from-the-vault-angels",
+    "magic-from-the-vault-annihilation",
+    "magic-from-the-vault-dragons",
+    "magic-from-the-vault-exiled",
+    "magic-from-the-vault-legends",
+    "magic-from-the-vault-lore",
+    "magic-from-the-vault-realms",
+    "magic-from-the-vault-relics",
+    "magic-from-the-vault-transform",
+    "magic-from-the-vault-twenty",
+    "magic-future-sight",
+    "magic-grn-guild-kit",
+    "magic-game-day-promos",
+    "magic-gatecrash",
+    "magic-guildpact",
+    "magic-guilds-of-ravnica",
+    "magic-historic-anthology-1",
+    "magic-historic-anthology-2",
+    "magic-historic-anthology-4",
+    "magic-historic-anthology-5",
+    "magic-homelands",
+    "magic-hour-of-devastation",
+    "idw",
+    "magic-ice-age",
+    "magic-iconic-masters",
+    "magic-ikoria-lair-of-behemoths",
+    "magic-ikoria-lair-of-behemoths-promos",
+    "magic-innistrad",
+    "magic-innistrad-crimson-vow",
+    "magic-innistrad-crimson-vow-promos",
+    "magic-innistrad-double-feature",
+    "magic-innistrad-midnight-hunt-promos",
+    "magic-innistrad-midnight-hunt",
+    "magic-innistrad-remastered",
+    "magic-introductory-two-player-set",
+    "magic-invasion",
+    "magic-ixalan",
+    "magic-journey-into-nyx",
+    "magic-judge-gift-cards-2010",
+    "magic-judge-gift-cards-2012",
+    "magic-judge-gift-cards-2014",
+    "magic-judge-gift-cards-2015",
+    "magic-judge-gift-cards-2016",
+    "magic-judge-gift-cards-2017",
+    "magic-judge-gift-cards-2018",
+    "magic-judge-gift-cards-2019",
+    "magic-judge-gift-cards-2020",
+    "magic-judge-gift-cards-2021",
+    "magic-judge-gift-cards-2022",
+    "magic-judge-gift-cards-2023",
+    "judge-promo",
+    "magic-judgment",
+    "magic-jumpstart",
+    "magic-jumpstart-2022",
+    "magic-jumpstart-arena-exclusives",
+    "magic-jurassic-world-collection",
+    "magic-kaladesh",
+    "magic-kaladesh-inventions",
+    "magic-kaldheim",
+    "magic-kaldheim-commander",
+    "magic-kaldheim-promos",
+    "magic-kamigawa-neon-dynasty",
+    "magic-kamigawa-neon-dynasty-promos",
+    "magic-khans-of-tarkir",
+    "magic-legends",
+    "magic-legions",
+    "magic-limited-edition-alpha",
+    "magic-limited-edition-beta",
+    "magic-lord-of-the-rings-tales-of-middle-earth",
+    "yugioh-lord-of-the-tachyon-galaxy",
+    "magic-lorwyn",
+    "magic-lorwyn-eclipsed",
+    "magic-lost-caverns-of-ixalan-commander",
+    "magic-love-your-lgs",
+    "magic-love-your-lgs-2021",
+    "magic-love-your-lgs-2022",
+    "magic-love-your-lgs-2024",
+    "magic-love-your-lgs-2025",
+    "magic-2010",
+    "magic-2011",
+    "magic-2012",
+    "magic-2013",
+    "magic-2014",
+    "magic-2015",
+    "magic-magicfest-2020",
+    "magic-origins",
+    "magic-march-of-the-machine",
+    "magic-march-of-the-machine-the-aftermath",
+    "magic-march-of-the-machine-commander",
+    "magic-march-of-the-machine-promos",
+    "magic-marvels-spider-man",
+    "magic-marvels-spider-man-eternal",
+    "magic-marvels-spider-man-promos",
+    "magic-marvel-universe",
+    "magic-amonkhet-invocations",
+    "magic-masters-25",
+    "magic-mercadian-masques",
+    "magic-midnight-hunt-commander",
+    "magic-mirage",
+    "magic-mirrodin",
+    "magic-mirrodin-besieged",
+    "magic-modern-event-deck-2014",
+    "magic-modern-horizons",
+    "magic-modern-horizons-1-timeshifts",
+    "magic-modern-horizons-2",
+    "magic-modern-horizons-2-promos",
+    "magic-modern-horizons-2-timeshifts",
+    "magic-modern-horizons-3",
+    "magic-modern-horizons-3-commander",
+    "magic-modern-horizons-3-promos",
+    "magic-modern-masters",
+    "magic-modern-masters-2015",
+    "magic-modern-masters-2017",
+    "magic-morningtide",
+    "magic-multiverse-legends",
+    "magic-murders-at-karlov-manor",
+    "magic-murders-at-karlov-manor-commander",
+    "magic-murders-at-karlov-manor-promos",
+    "magic-murders-at-karlov-manor-standard-showdown",
+    "magic-mystery-booster",
+    "magic-mystery-booster-2",
+    "magic-mystery-booster-playtest-cards-2021",
+    "magic-mystery-booster-retail-edition-foils",
+    "magic-nemesis",
+    "magic-neon-dynasty-commander",
+    "magic-new-capenna-commander",
+    "magic-new-phyrexia",
+    "magic-ninth-edition",
+    "magic-oath-of-the-gatewatch",
+    "magic-odyssey",
+    "magic-onslaught",
+    "magic-outlaws-of-thunder-junction",
+    "magic-outlaws-of-thunder-junction-commander",
+    "magic-phyrexia-all-will-be-one",
+    "magic-phyrexia-all-will-be-one-commander",
+    "magic-phyrexia-all-will-be-one-promos",
+    "magic-planar-chaos",
+    "magic-planechase",
+    "magic-planechase-2012",
+    "magic-planechase-anthology",
+    "magic-planeshift",
+    "player-rewards",
+    "magic-ponies-the-galloping",
+    "magic-portal",
+    "magic-portal-demo-game",
+    "magic-portal-second-age",
+    "magic-portal-three-kingdoms",
+    "power-9",
+    "magic-premium-deck-series-fire-and-lightning",
+    "magic-premium-deck-series-graveborn",
+    "promo",
+    "magic-prophecy",
+    "magic-ravnica-city-of-guilds",
+    "magic-ravnica-clue-edition",
+    "magic-ravnica-allegiance",
+    "magic-ravnica-remastered",
+    "magic-regional-championship-qualifiers-2022",
+    "magic-regional-championship-qualifiers-2023",
+    "magic-return-to-ravnica",
+    "magic-revised-edition",
+    "magic-rise-of-the-eldrazi",
+    "magic-rivals-of-ixalan",
+    "magic-san-diego-comic-con-2019",
+    "magic-saviors-of-kamigawa",
+    "magic-scars-of-mirrodin",
+    "magic-scourge",
+    "magic-secret-lair-30th-anniversary-countdown-kit",
+    "magic-secret-lair-ultimate-edition",
+    "magic-secret-lair-drop",
+    "magic-secret-lair-drop-promos",
+    "magic-secret-lair-drop-series",
+    "magic-secret-lair-promos",
+    "magic-secret-lair-showdown",
+    "magic-secrets-of-strixhaven",
+    "magic-secrets-of-strixhaven-commander",
+    "magic-secrets-of-strixhaven-mystical-archive",
+    "magic-seventh-edition",
+    "magic-shadowmoor",
+    "magic-shadows-over-innistrad",
+    "magic-shards-of-alara",
+    "magic-signature-spellbook-chandra",
+    "magic-signature-spellbook-gideon",
+    "magic-signature-spellbook-jace",
+    "special",
+    "magic-special-guests",
+    "yugioh-starter-deck",
+    "startlekar",
+    "magic-store-championships-2022",
+    "magic-streets-of-new-capenna",
+    "magic-streets-of-new-capenna-promos",
+    "strixhaven",
+    "magic-strixhaven-school-of-mages",
+    "magic-strixhaven-school-of-mages-promos",
+    "magic-strixhaven-mystical-archive",
+    "magic-stronghold",
+    "structuredeck",
+    "magic-tales-of-middle-earth-promos",
+    "magic-tales-of-middle-earth-commander",
+    "magic-tarkir-dragonstorm-commander",
+    "magic-tarkir-dragonstorm-promos",
+    "magic-tarkir-dragonstorm",
+    "magic-teenage-mutant-ninja-turtles",
+    "magic-teenage-mutant-ninja-turtles-eternal",
+    "magic-teenage-mutant-ninja-turtles-source-material",
+    "magic-tempest",
+    "magic-tenth-edition",
+    "textless",
+    "magic-the-big-score",
+    "magic-the-brothers-war",
+    "magic-the-brothers-war-commander",
+    "magic-the-brothers-war-promos",
+    "magic-the-brothers-war-retro-artifacts",
+    "magic-the-dark",
+    "magic-the-list",
+    "magic-the-list-unfinity-foil-edition",
+    "magic-the-lord-of-the-rings-tales-of-middle-earth",
+    "magic-the-lost-caverns-of-ixalan",
+    "magic-the-lost-caverns-of-ixalan-promos",
+    "magic-theros",
+    "magic-theros-beyond-death",
+    "magic-theros-beyond-death-promos",
+    "magic-throne-of-eldraine",
+    "magic-throne-of-eldraine-promos",
+    "magic-time-spiral",
+    "magic-time-spiral-timeshifted",
+    "magic-time-spiral-remastered",
+    "yugioh-token",
+    "tokens-for-mtg",
+    "magic-torment",
+    "magic-transformers",
+    "magic-ugins-fate",
+    "magic-ultimate-box-topper",
+    "magic-ultimate-masters",
+    "magic-unfinity",
+    "magic-unglued",
+    "magic-unhinged",
+    "universes-beyond-doctor-who",
+    "magic-universes-within",
+    "magic-unlimited-edition",
+    "magic-unsanctioned",
+    "magic-unstable",
+    "magic-urzas-destiny",
+    "magic-urzas-legacy",
+    "magic-urzas-saga",
+    "magic-visions",
+    "magic-war-of-the-spark",
+    "magic-warhammer-40-000",
+    "magic-war-of-the-spark-promos",
+    "magic-weatherlight",
+    "magic-wilds-of-eldraine",
+    "magic-wilds-of-eldraine-enchanting-tales",
+    "magic-wilds-of-eldraine-commander",
+    "magic-wizards-play-network-2021",
+    "magic-wizards-play-network-2022",
+    "magic-wizards-play-network-2024",
+    "magic-worldwake",
+    "magic-year-of-the-rabbit-2023",
+    "yummy-tokens",
+    "magic-zendikar",
+    "magic-zendikar-rising",
+    "magic-zendikar-rising-commander",
+    "magic-zendikar-rising-expeditions",
+    "magic-zendikar-rising-promos"
+  ],
+  "requests_today": 250,
+  "scan_completed_at": null,
+  "incomplete_set": {
+    "slug": "magic-kamigawa-neon-dynasty",
+    "title": "Kamigawa: Neon Dynasty",
+    "page_count": 29,
+    "card_count": 1027,
+    "start_page": 5,
+    "is_new": true
+  }
+}
